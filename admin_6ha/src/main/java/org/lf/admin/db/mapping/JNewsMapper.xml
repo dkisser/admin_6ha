@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.JNewsMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.JNews" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="lx" property="lx" jdbcType="INTEGER" />
+    <result column="dm" property="dm" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="sqr" property="sqr" jdbcType="VARCHAR" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="zt" property="zt" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.lf.admin.db.pojo.JNews">
+    <result column="remark" jdbcType="LONGVARBINARY" property="remark" />
+  </resultMap>
+  <sql id="query_selective">
+  	  <if test="id != null" >
+        and id=#{id,jdbcType=INTEGER}
+      </if>
+  	  <if test="dm != null" >
+        and dm=#{dm,jdbcType=VARCHAR}
+      </if>
+      <if test="lx != null" >
+        and lx=#{lx,jdbcType=INTEGER}
+      </if>
+      <if test="title != null" >
+        and title=#{title,jdbcType=VARCHAR}
+      </if>
+      <if test="sqr != null" >
+      	and sqr = #{sqr,jdbcType=VARCHAR}
+      </if>
+      <if test="imgurl != null" >
+        and imgUrl=#{imgurl,jdbcType=VARCHAR}
+      </if>
+      <if test="href != null" >
+        and href=#{href,jdbcType=VARCHAR}
+      </if>
+      <if test="date != null" >
+        and date=#{date,jdbcType=VARCHAR}
+      </if>
+      <if test="zt != null" >
+        and zt=#{zt,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id,dm, lx, title, sqr, imgUrl, href, date, zt
+  </sql>
+  <sql id="Blob_Column_List">
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+     ,
+    <include refid="Blob_Column_List" />
+    from j_news
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from j_news
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.JNews" >
+    insert into j_news (Id,dm, lx, title, 
+      sqr, imgUrl, 
+      href, date, zt,remark)
+    values (#{id,jdbcType=INTEGER},#{dm,jdbcType=VARCHAR}, #{lx,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{sqr,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, 
+      #{href,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{zt,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.JNews" >
+    insert into j_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="dm != null" >
+        dm,
+      </if>
+      <if test="lx != null" >
+        lx,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="sqr != null" >
+        sqr,
+      </if>
+      <if test="imgurl != null" >
+        imgUrl,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="zt != null" >
+        zt,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        #{dm,jdbcType=VARCHAR},
+      </if>
+      <if test="lx != null" >
+        #{lx,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sqr != null" >
+        #{sqr,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lf.admin.db.pojo.JNews" >
+    update j_news
+    <set >
+      <if test="lx != null" >
+        lx = #{lx,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        dm=#{dm,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sqr != null" >
+        sqr = #{sqr,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        imgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        zt = #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lf.admin.db.pojo.JNews" >
+    update j_news
+    set lx = #{lx,jdbcType=INTEGER},
+      dm = #{dm,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      sqr = #{sqr,jdbcType=VARCHAR},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      zt = #{zt,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.lf.admin.db.pojo.JNews">
+    update j_news
+    set lx = #{lx,jdbcType=INTEGER},
+      dm = #{dm,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      sqr = #{sqr,jdbcType=VARCHAR},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      zt = #{zt,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARBINARY}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="select" parameterType="org.lf.admin.db.pojo.JNews"
+  resultMap="BaseResultMap">
+  	select * from j_news
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+  <select id="selectList" parameterType="org.lf.admin.db.pojo.JNews"
+  resultMap="BaseResultMap">
+  	select * from j_news
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+</mapper>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.JPicMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.JPic" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="mc" property="mc" jdbcType="VARCHAR" />
+    <result column="yxlx" property="yxlx" jdbcType="VARCHAR" />
+    <result column="pic_lx" property="picLx" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="query_selective">
+  	  <if test="id != null" >
+        and id=#{id,jdbcType=INTEGER}
+      </if>
+      <if test="mc != null" >
+        and mc=#{mc,jdbcType=VARCHAR}
+      </if>
+      <if test="yxlx != null" >
+        and yxlx=#{yxlx,jdbcType=VARCHAR}
+      </if>
+      <if test="picLx != null" >
+        and pic_lx=#{picLx,jdbcType=INTEGER}
+      </if>
+      <if test="num != null" >
+        and num=#{num,jdbcType=INTEGER}
+      </if>
+      <if test="imgurl != null" >
+        and imgUrl=#{imgurl,jdbcType=VARCHAR}
+      </if>
+      <if test="href != null" >
+        and href=#{href,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, mc, yxlx, pic_lx, num, imgUrl, href
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from j_pic
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from j_pic
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.JPic" >
+    insert into j_pic (Id, mc, yxlx, 
+      pic_lx, num, imgUrl, 
+      href)
+    values (#{id,jdbcType=INTEGER}, #{mc,jdbcType=VARCHAR}, #{yxlx,jdbcType=VARCHAR}, 
+      #{picLx,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{imgurl,jdbcType=VARCHAR}, 
+      #{href,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.JPic" >
+    insert into j_pic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="mc != null" >
+        mc,
+      </if>
+      <if test="yxlx != null" >
+        yxlx,
+      </if>
+      <if test="picLx != null" >
+        pic_lx,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="imgurl != null" >
+        imgUrl,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mc != null" >
+        #{mc,jdbcType=VARCHAR},
+      </if>
+      <if test="yxlx != null" >
+        #{yxlx,jdbcType=VARCHAR},
+      </if>
+      <if test="picLx != null" >
+        #{picLx,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lf.admin.db.pojo.JPic" >
+    update j_pic
+    <set >
+      <if test="mc != null" >
+        mc = #{mc,jdbcType=VARCHAR},
+      </if>
+      <if test="yxlx != null" >
+        yxlx = #{yxlx,jdbcType=VARCHAR},
+      </if>
+      <if test="picLx != null" >
+        pic_lx = #{picLx,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null" >
+        imgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lf.admin.db.pojo.JPic" >
+    update j_pic
+    set mc = #{mc,jdbcType=VARCHAR},
+      yxlx = #{yxlx,jdbcType=VARCHAR},
+      pic_lx = #{picLx,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="select" parameterType="org.lf.admin.db.pojo.JPic"
+  resultMap="BaseResultMap">
+  	select * from j_pic
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  		<if test="start != null and offset != null" >
+        	limit #{start,jdbcType=INTEGER},#{offset,jdbcType=INTEGER} 
+      	</if>
+  </select>
+  <select id="selectList" parameterType="org.lf.admin.db.pojo.JPic"
+  resultMap="BaseResultMap">
+  	select * from j_pic
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  		<if test="start != null and offset != null" >
+        	limit #{start,jdbcType=INTEGER},#{offset,jdbcType=INTEGER} 
+      	</if>
+  </select>
+</mapper>

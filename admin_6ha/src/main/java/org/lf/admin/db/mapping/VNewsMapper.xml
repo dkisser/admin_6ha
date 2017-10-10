@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.VNewsMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.VNews" >
+    <result column="Id" property="id" jdbcType="INTEGER" />
+    <result column="dm" property="dm" jdbcType="VARCHAR" />
+    <result column="lx" property="lx" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="sqr" property="sqr" jdbcType="VARCHAR" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="zt" property="zt" jdbcType="INTEGER" />
+    <result column="fzr" property="fzr" jdbcType="VARCHAR" />
+    <result column="glr" property="glr" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.lf.admin.db.pojo.JNews">
+    <result column="remark" jdbcType="LONGVARBINARY" property="remark" />
+  </resultMap>
+  <sql id="queryFuzzy">
+  	  <if test="id != null" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+  	  <if test="dm != null" >
+        and dm = #{dm,jdbcType=VARCHAR}
+      </if>
+      <if test="lx != null" >
+        and lx = #{lx,jdbcType=INTEGER}
+      </if>
+      <if test="title != null" >
+        and title like concat ('%',#{title,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="sqr != null" >
+        and sqr like concat('%',#{sqr,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="imgurl != null" >
+        and imgUrl = #{imgurl,jdbcType=VARCHAR}
+      </if>
+      <if test="href != null" >
+        and href = #{href,jdbcType=VARCHAR}
+      </if>
+      <if test="date != null" >
+        and date = #{date,jdbcType=VARCHAR}
+      </if>
+      <if test="fzr != null" >
+        and fzr = #{fzr,jdbcType=VARCHAR}
+      </if>
+      <if test="glr != null" >
+        and glr = #{glr,jdbcType=VARCHAR}
+      </if>
+      <if test="ztList != null and ztList.size() > 0" >
+        and zt in <foreach collection="ztList" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
+      </if>
+  </sql>
+  <sql id="query_selective">
+  	  <if test="id != null" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="dm != null" >
+        and dm = #{dm,jdbcType=VARCHAR}
+      </if>
+      <if test="lx != null" >
+        and lx = #{lx,jdbcType=INTEGER}
+      </if>
+      <if test="title != null" >
+        and title = #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="sqr != null" >
+        and sqr = #{sqr,jdbcType=VARCHAR}
+      </if>
+      <if test="imgurl != null" >
+        and imgUrl = #{imgurl,jdbcType=VARCHAR}
+      </if>
+      <if test="href != null" >
+        and href = #{href,jdbcType=VARCHAR}
+      </if>
+      <if test="date != null" >
+        and date = #{date,jdbcType=VARCHAR}
+      </if>
+      <if test="zt != null" >
+        and zt = #{zt,jdbcType=INTEGER}
+      </if>
+      <if test="fzr != null" >
+        and fzr = #{fzr,jdbcType=VARCHAR}
+      </if>
+      <if test="glr != null" >
+        and glr = #{glr,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.VNews" >
+    insert into v_news (Id,dm, lx, title, 
+      sqr, imgUrl, href, 
+      date, zt, fzr, glr
+      )
+    values (#{id,jdbcType=INTEGER},#{dm,jdbcType=VARCHAR}, #{lx,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{sqr,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, 
+      #{date,jdbcType=VARCHAR}, #{zt,jdbcType=INTEGER}, #{fzr,jdbcType=VARCHAR}, #{glr,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.VNews" >
+    insert into v_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="dm != null" >
+        dm,
+      </if>
+      <if test="lx != null" >
+        lx,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="sqr != null" >
+        sqr,
+      </if>
+      <if test="imgurl != null" >
+        imgUrl,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="zt != null" >
+        zt,
+      </if>
+      <if test="fzr != null" >
+        fzr,
+      </if>
+      <if test="glr != null" >
+        glr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        #{dm,jdbcType=VARCHAR}
+      </if>
+      <if test="lx != null" >
+        #{lx,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sqr != null" >
+        #{sqr,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="fzr != null" >
+        #{fzr,jdbcType=VARCHAR},
+      </if>
+      <if test="glr != null" >
+        #{glr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="select" parameterType="org.lf.admin.db.pojo.VNews" 
+  resultMap="BaseResultMap" >
+  	select * from v_news
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+  <select id="selectList" parameterType="org.lf.admin.db.pojo.VNews" 
+  resultMap="BaseResultMap" >
+  	select * from v_news
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+  <select id="getVnewsListFuzzy" parameterType="java.util.Map"
+  resultMap="BaseResultMap">
+  	select * from v_news
+  		<where>
+  			<include refid="queryFuzzy"></include>
+  		</where>
+  </select>
+</mapper>

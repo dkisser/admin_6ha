@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.LNewsMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.LNews" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="dm" property="dm" jdbcType="VARCHAR" />
+    <result column="czr" property="czr" jdbcType="VARCHAR" />
+    <result column="old_zt" property="oldZt" jdbcType="INTEGER" />
+    <result column="new_zt" property="newZt" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, dm, czr, old_zt, new_zt, date, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from l_news
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from l_news
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.LNews" >
+    insert into l_news (Id, dm, czr, 
+      old_zt, new_zt, date, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{dm,jdbcType=VARCHAR}, #{czr,jdbcType=VARCHAR}, 
+      #{oldZt,jdbcType=INTEGER}, #{newZt,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.LNews" >
+    insert into l_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="dm != null" >
+        dm,
+      </if>
+      <if test="czr != null" >
+        czr,
+      </if>
+      <if test="oldZt != null" >
+        old_zt,
+      </if>
+      <if test="newZt != null" >
+        new_zt,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        #{dm,jdbcType=VARCHAR},
+      </if>
+      <if test="czr != null" >
+        #{czr,jdbcType=VARCHAR},
+      </if>
+      <if test="oldZt != null" >
+        #{oldZt,jdbcType=INTEGER},
+      </if>
+      <if test="newZt != null" >
+        #{newZt,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lf.admin.db.pojo.LNews" >
+    update l_news
+    <set >
+      <if test="dm != null" >
+        dm = #{dm,jdbcType=VARCHAR},
+      </if>
+      <if test="czr != null" >
+        czr = #{czr,jdbcType=VARCHAR},
+      </if>
+      <if test="oldZt != null" >
+        old_zt = #{oldZt,jdbcType=INTEGER},
+      </if>
+      <if test="newZt != null" >
+        new_zt = #{newZt,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lf.admin.db.pojo.LNews" >
+    update l_news
+    set dm = #{dm,jdbcType=VARCHAR},
+      czr = #{czr,jdbcType=VARCHAR},
+      old_zt = #{oldZt,jdbcType=INTEGER},
+      new_zt = #{newZt,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

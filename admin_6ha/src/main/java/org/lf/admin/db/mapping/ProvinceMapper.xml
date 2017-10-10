@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.ProvinceMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.Province" >
+    <id column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    province_id, province_name
+  </sql>
+  <sql id="query_selective">
+  	  <if test="provinceId != null" >
+        and province_id  = #{provinceId,jdbcType=INTEGER}
+      </if>
+      <if test="provinceName != null" >
+        and province_name = #{provinceName,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from province
+    where province_id = #{provinceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from province
+    where province_id = #{provinceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.Province" >
+    insert into province (province_id, province_name)
+    values (#{provinceId,jdbcType=INTEGER}, #{provinceName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.Province" >
+    insert into province
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lf.admin.db.pojo.Province" >
+    update province
+    <set >
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where province_id = #{provinceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lf.admin.db.pojo.Province" >
+    update province
+    set province_name = #{provinceName,jdbcType=VARCHAR}
+    where province_id = #{provinceId,jdbcType=INTEGER}
+  </update>
+  <select id="select" parameterType="org.lf.admin.db.pojo.Province"
+  resultMap="BaseResultMap">
+  	select * from province
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+  <select id="selectList" parameterType="org.lf.admin.db.pojo.Province"
+  resultMap="BaseResultMap">
+  	select * from province
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.CXwlxMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.CXwlx" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="lx_Id" property="lxId" jdbcType="INTEGER" />
+    <result column="lx_Pid" property="lxPid" jdbcType="INTEGER" />
+    <result column="lx_name" property="lxName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, lx_Id, lx_Pid, lx_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_xwlx
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_xwlx
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.CXwlx" >
+    insert into c_xwlx (Id, lx_Id, lx_Pid, 
+      lx_name)
+    values (#{id,jdbcType=INTEGER}, #{lxId,jdbcType=INTEGER}, #{lxPid,jdbcType=INTEGER}, 
+      #{lxName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.CXwlx" >
+    insert into c_xwlx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="lxId != null" >
+        lx_Id,
+      </if>
+      <if test="lxPid != null" >
+        lx_Pid,
+      </if>
+      <if test="lxName != null" >
+        lx_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lxId != null" >
+        #{lxId,jdbcType=INTEGER},
+      </if>
+      <if test="lxPid != null" >
+        #{lxPid,jdbcType=INTEGER},
+      </if>
+      <if test="lxName != null" >
+        #{lxName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lf.admin.db.pojo.CXwlx" >
+    update c_xwlx
+    <set >
+      <if test="lxId != null" >
+        lx_Id = #{lxId,jdbcType=INTEGER},
+      </if>
+      <if test="lxPid != null" >
+        lx_Pid = #{lxPid,jdbcType=INTEGER},
+      </if>
+      <if test="lxName != null" >
+        lx_name = #{lxName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lf.admin.db.pojo.CXwlx" >
+    update c_xwlx
+    set lx_Id = #{lxId,jdbcType=INTEGER},
+      lx_Pid = #{lxPid,jdbcType=INTEGER},
+      lx_name = #{lxName,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

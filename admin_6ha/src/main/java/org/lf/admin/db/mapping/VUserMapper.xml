@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.VUserMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.VUser" >
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="petname" property="petname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="query_selective">
+  	  <if test="uname != null" >
+        and uname = #{uname,jdbcType=VARCHAR}
+      </if>
+      <if test="petname != null" >
+        and petname = #{petname,jdbcType=VARCHAR}
+      </if>
+      <if test="sex != null" >
+        and sex = #{sex,jdbcType=VARCHAR}
+      </if>
+      <if test="age != null" >
+        and age = #{age,jdbcType=INTEGER}
+      </if>
+      <if test="birthday != null" >
+        and birthday = #{birthday,jdbcType=DATE}
+      </if>
+      <if test="idCard != null" >
+        and id_card = #{idCard,jdbcType=VARCHAR}
+      </if>
+      <if test="provinceName != null" >
+        and province_name = #{provinceName,jdbcType=VARCHAR}
+      </if>
+      <if test="cityName != null" >
+        and city_name = #{cityName,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null" >
+        and email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="phone != null" >
+        and phone = #{phone,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=BIT}
+      </if>
+      <if test="role != null" >
+        and role = #{role,jdbcType=VARCHAR}
+      </if>
+      <if test="grade != null" >
+        and grade = #{grade,jdbcType=INTEGER}
+      </if>
+  </sql>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.VUser" >
+    insert into v_user (uname, petname, sex, 
+      age, birthday, id_card, 
+      province_name, city_name, email, 
+      phone, status, role, grade
+      )
+    values (#{uname,jdbcType=VARCHAR}, #{petname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{idCard,jdbcType=VARCHAR}, 
+      #{provinceName,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{role,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.VUser" >
+    insert into v_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="petname != null" >
+        petname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="name != null" >
+        role,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="petname != null" >
+        #{petname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="select" parameterType="org.lf.admin.db.pojo.VUser"
+  resultMap="BaseResultMap">
+  	select * from v_user
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+  <select id="countSelect" parameterType="org.lf.admin.db.pojo.VUser"
+  resultType="java.lang.Integer">
+  	select count(*) from v_user
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+</mapper>

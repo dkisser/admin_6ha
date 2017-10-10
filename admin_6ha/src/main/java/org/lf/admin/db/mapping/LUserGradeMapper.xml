@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.LUserGradeMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.LUserGrade" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="old_grade" property="oldGrade" jdbcType="INTEGER" />
+    <result column="new_grade" property="newGrade" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="czsj" property="czsj" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="countRechargeMap" type="org.lf.admin.service.model.Recharge">
+  	<result column="user_name" property="userName" jdbcType="VARCHAR" />
+  	<result column="year" property="year" jdbcType="INTEGER" />
+  	<result column="czsj" property="czsj" jdbcType="DATE" />
+  	<result column="num" property="num" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_name, old_grade, new_grade, price, czsj
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from l_user_grade
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from l_user_grade
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.LUserGrade" >
+    insert into l_user_grade (id, user_name, old_grade, 
+      new_grade, price, czsj)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{oldGrade,jdbcType=INTEGER}, 
+      #{newGrade,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{czsj,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.LUserGrade" >
+    insert into l_user_grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="oldGrade != null" >
+        old_grade,
+      </if>
+      <if test="newGrade != null" >
+        new_grade,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="czsj != null" >
+        czsj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldGrade != null" >
+        #{oldGrade,jdbcType=INTEGER},
+      </if>
+      <if test="newGrade != null" >
+        #{newGrade,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="czsj != null" >
+        #{czsj,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lf.admin.db.pojo.LUserGrade" >
+    update l_user_grade
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldGrade != null" >
+        old_grade = #{oldGrade,jdbcType=INTEGER},
+      </if>
+      <if test="newGrade != null" >
+        new_grade = #{newGrade,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="czsj != null" >
+        czsj = #{czsj,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lf.admin.db.pojo.LUserGrade" >
+    update l_user_grade
+    set user_name = #{userName,jdbcType=VARCHAR},
+      old_grade = #{oldGrade,jdbcType=INTEGER},
+      new_grade = #{newGrade,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      czsj = #{czsj,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getRechargeInfo" parameterType="org.lf.admin.db.pojo.LUserGrade"
+  resultMap="countRechargeMap">
+  select lug.user_name,DATE_FORMAT(lug.czsj,"%Y") year,lug.czsj,sum(price) num
+	from l_user_grade lug
+	where user_name=#{userName,jdbcType=VARCHAR} and czsj between DATE_FORMAT(concat(#{year,jdbcType=INTEGER},"-01-01"),"%Y-%m-%d") and DATE_FORMAT(concat(#{year,jdbcType=INTEGER},"-12-31"),"%Y-%m-%d")
+	group by lug.czsj
+	order by lug.czsj
+  </select>
+  <select id="getRechargeYearInfo" parameterType="java.lang.String"
+  resultMap="countRechargeMap">
+    select distinct(DATE_FORMAT(lug.czsj,"%Y")) year
+	from l_user_grade lug
+	where user_name= #{uname,jdbcType=VARCHAR}
+  </select>
+</mapper>

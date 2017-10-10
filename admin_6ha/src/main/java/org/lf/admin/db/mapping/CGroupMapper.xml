@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.CGroupMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.CGroup" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="mc" property="mc" jdbcType="VARCHAR" />
+    <result column="fzr" property="fzr" jdbcType="VARCHAR" />
+    <result column="glr" property="glr" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="query_selective">
+  	  <if test="id != null" >
+        and id =#{id,jdbcType=INTEGER}
+      </if>
+      <if test="mc != null" >
+        and mc =#{mc,jdbcType=VARCHAR}
+      </if>
+      <if test="fzr != null" >
+        and fzr =#{fzr,jdbcType=VARCHAR}
+      </if>
+      <if test="glr != null" >
+        and glr =#{glr,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, mc, fzr, glr
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_group
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_group
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.CGroup" >
+    insert into c_group (Id, mc, fzr, 
+      glr)
+    values (#{id,jdbcType=INTEGER}, #{mc,jdbcType=VARCHAR}, #{fzr,jdbcType=VARCHAR}, 
+      #{glr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.CGroup" >
+    insert into c_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="mc != null" >
+        mc,
+      </if>
+      <if test="fzr != null" >
+        fzr,
+      </if>
+      <if test="glr != null" >
+        glr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mc != null" >
+        #{mc,jdbcType=VARCHAR},
+      </if>
+      <if test="fzr != null" >
+        #{fzr,jdbcType=VARCHAR},
+      </if>
+      <if test="glr != null" >
+        #{glr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lf.admin.db.pojo.CGroup" >
+    update c_group
+    <set >
+      <if test="mc != null" >
+        mc = #{mc,jdbcType=VARCHAR},
+      </if>
+      <if test="fzr != null" >
+        fzr = #{fzr,jdbcType=VARCHAR},
+      </if>
+      <if test="glr != null" >
+        glr = #{glr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lf.admin.db.pojo.CGroup" >
+    update c_group
+    set mc = #{mc,jdbcType=VARCHAR},
+      fzr = #{fzr,jdbcType=VARCHAR},
+      glr = #{glr,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="select" parameterType="org.lf.admin.db.pojo.CGroup" 
+  resultMap="BaseResultMap">
+  	select * from c_group
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+  <select id="selectList" parameterType="org.lf.admin.db.pojo.CGroup" 
+  resultMap="BaseResultMap">
+  	select * from c_group
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+</mapper>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.JYxMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.JYx" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="lx" property="lx" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="zt" property="zt" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="query_selective">
+  	  <if test="id != null" >
+        and id =#{id,jdbcType=INTEGER}
+      </if>
+      <if test="lx != null" >
+        and lx = #{lx,jdbcType=VARCHAR}
+      </if>
+      <if test="title != null" >
+        and title = #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="imgurl != null" >
+        and imgUrl = #{imgurl,jdbcType=VARCHAR}
+      </if>
+      <if test="href != null" >
+        and href=#{href,jdbcType=VARCHAR}
+      </if>
+      <if test="count != null" >
+        and count = #{count,jdbcType=INTEGER}
+      </if>
+      <if test="zt != null" >
+        and zt = #{zt,jdbcType=INTEGER}
+      </if>
+      <if test="remark != null" >
+        and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, lx, title, imgUrl, href, count, zt, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from j_yx
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from j_yx
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.JYx" >
+    insert into j_yx (Id, lx, title, 
+      imgUrl, href, count, 
+      zt, remark)
+    values (#{id,jdbcType=INTEGER}, #{lx,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{imgurl,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{zt,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.JYx" >
+    insert into j_yx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="lx != null" >
+        lx,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="imgurl != null" >
+        imgUrl,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="zt != null" >
+        zt,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lx != null" >
+        #{lx,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lf.admin.db.pojo.JYx" >
+    update j_yx
+    <set >
+      <if test="lx != null" >
+        lx = #{lx,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        imgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="zt != null" >
+        zt = #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lf.admin.db.pojo.JYx" >
+    update j_yx
+    set lx = #{lx,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      zt = #{zt,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="select" parameterType="org.lf.admin.db.pojo.JYx"
+  resultMap="BaseResultMap">
+  	select * from j_yx
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  		<if test="start != null and offset != null">
+  			limit #{start,jdbcType=INTEGER},#{offset,jdbcType=INTEGER}
+  		</if>
+  </select>
+  <select id="selectList" parameterType="org.lf.admin.db.pojo.JYx"
+  resultMap="BaseResultMap">
+  	select * from j_yx
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  		<if test="start != null and offset != null">
+  			limit #{start,jdbcType=INTEGER},#{offset,jdbcType=INTEGER}
+  		</if>
+  </select>
+</mapper>

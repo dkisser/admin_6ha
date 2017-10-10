@@ -1,0 +1,99 @@
+[ERROR] [2017-08-08 16:22:22][org.springframework.test.context.TestContextManager]Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7bc0bd17] to prepare test instance [org.lf.web.service.WebHomeServiceTest@260d563d]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:230)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:228)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:287)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:289)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:247)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Unexpected exception parsing XML document from class path resource [spring-mybatis.xml]; nested exception is org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'homeController' for bean class [org.lf.web.action.HomeController] conflicts with existing, non-compatible bean definition of same name and class [org.lf.admin.action.HomeController]
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:414)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:336)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304)
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181)
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217)
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188)
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:252)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadBeanDefinitions(AbstractGenericContextLoader.java:257)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:124)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:108)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:251)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
+	... 25 more
+Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'homeController' for bean class [org.lf.web.action.HomeController] conflicts with existing, non-compatible bean definition of same name and class [org.lf.admin.action.HomeController]
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.checkCandidate(ClassPathBeanDefinitionScanner.java:345)
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan(ClassPathBeanDefinitionScanner.java:283)
+	at org.springframework.context.annotation.ComponentScanBeanDefinitionParser.parse(ComponentScanBeanDefinitionParser.java:87)
+	at org.springframework.beans.factory.xml.NamespaceHandlerSupport.parse(NamespaceHandlerSupport.java:74)
+	at org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.parseCustomElement(BeanDefinitionParserDelegate.java:1411)
+	at org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.parseCustomElement(BeanDefinitionParserDelegate.java:1401)
+	at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.parseBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:172)
+	at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.doRegisterBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:142)
+	at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.registerBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:94)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.registerBeanDefinitions(XmlBeanDefinitionReader.java:508)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:392)
+	... 38 more
+[ERROR] [2017-08-08 16:23:27][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-08 16:24:57][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-08 16:27:14][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-08 16:31:02][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-08 16:32:49][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-08 16:33:09][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-08 16:34:46][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-08 16:35:07][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-18 13:28:08][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-18 13:33:32][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-18 13:47:46][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-18 13:48:17][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-18 13:50:35][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-18 13:51:19][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-21 16:32:40][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-22 12:32:19][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-22 12:36:42][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-22 12:37:27][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-22 12:48:09][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-22 12:48:33][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-22 16:09:14][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-23 14:12:11][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-23 14:12:53][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-23 14:13:47][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-23 14:14:35][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 11:19:38][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 11:19:52][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 11:20:06][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 11:20:19][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 11:20:31][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 11:21:41][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 12:03:39][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 12:05:51][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 12:07:13][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 12:07:51][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 12:08:27][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 12:09:03][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 12:09:24][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-08-24 12:10:12][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-09-23 10:57:27][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-09-23 11:02:04][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-09-23 11:03:59][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
