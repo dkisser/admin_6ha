@@ -1,4 +1,4 @@
-package org.lf.admin.action.twsj;
+package org.lf.admin.action.tw;
 
 import javax.servlet.http.HttpSession;
 

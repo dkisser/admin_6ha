@@ -13,18 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
 <body>
-<div id="dlgdttpspUIMain"></div>
 
-<script type="text/javascript">
-	$("#dlgdttpspUIMain").dialog({
-		title:"动态图片上架审批",
-		width: 1024,
-		height:600,
-		modal:true,
-		inline:true,
-		cache:false
-	});
-</script>
 
 </body>
 </html>

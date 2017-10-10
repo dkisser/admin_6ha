@@ -291,7 +291,7 @@ public class TWSJService {
 			StringBuilder remarkSb = new StringBuilder();
 			remarkSb.append("大图文").append("(").append(record.getDm()).append(")");
 			remarkSb.append("于").append(DateUtils.toString(new Date())).append("被").append(czr);
-			remarkSb.append("进行修改，现处于").append(XWZT.valueOf(record.getZt())).append("状态");
+			remarkSb.append("进行修改，现处于").append(XWZT.valueOf(record.getZt()-1)).append("状态");
 			lnews.setRemark(remarkSb.toString());
 			lNewsDao.insertSelective(lnews);
 		} catch (Exception e) {

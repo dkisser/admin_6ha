@@ -97,3 +97,4 @@ Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionExcep
 [ERROR] [2017-09-23 10:57:27][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
 [ERROR] [2017-09-23 11:02:04][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
 [ERROR] [2017-09-23 11:03:59][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated
+[ERROR] [2017-10-10 15:52:21][com.alibaba.druid.pool.DruidAbstractDataSource]maxIdle is deprecated

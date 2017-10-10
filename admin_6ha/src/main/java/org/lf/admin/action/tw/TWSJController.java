@@ -1,4 +1,4 @@
-package org.lf.admin.action.twsj;
+package org.lf.admin.action.tw;
 
 import javax.servlet.http.HttpSession;
 
@@ -92,13 +92,6 @@ public class TWSJController extends BaseController{
 		return SUCCESS;
 	}
 	
-	@RequestMapping("editDtwUI.do")
-	public String editDtwUI (Model model,Integer id){
-		VNews vnews = new VNews();
-		vnews.setId(id);
-		model.addAttribute("editNews", twsjService.getVNews(vnews));
-		return ROOT_URL+"/dtw/editDtwUI";
-	}
 	/**
 	 * 大图文上架-编辑
 	 * @param session
@@ -109,6 +102,14 @@ public class TWSJController extends BaseController{
 	 * @param file
 	 * @return
 	 */
+	@RequestMapping("editDtwUI.do")
+	public String editDtwUI (Model model,Integer id){
+		VNews vnews = new VNews();
+		vnews.setId(id);
+		model.addAttribute("editNews", twsjService.getVNews(vnews));
+		return ROOT_URL+"/dtw/editDtwUI";
+	}
+	
 	@RequestMapping("editDtw.do")
 	@ResponseBody
 	public String editDtw(HttpSession session,String twdm,String title,String content,

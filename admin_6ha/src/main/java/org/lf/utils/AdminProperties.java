@@ -51,4 +51,12 @@ public class AdminProperties {
 	
 	public static final String PIC_TEMP_DIR = AdminProperties.getValue("pic_temp_targDir");
 	
+	public static final String RKDXW_HTML_TARGDIR = AdminProperties.getValue("rkdxw_html_targDir");
+	
+	public static final String RKDXW_PIC_TARGDIR = AdminProperties.getValue("rkdxw_pic_targDir");
+	
+	public static final String GDXW_PIC_TARGDIR = AdminProperties.getValue("gdxw_pic_targDir");
+	
+	public static final String GDXW_HTML_TARGDIR = AdminProperties.getValue("gdxw_html_targDir");
+	
 }
