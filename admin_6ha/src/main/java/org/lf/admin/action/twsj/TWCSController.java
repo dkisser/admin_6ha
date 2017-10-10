@@ -68,12 +68,12 @@ public class TWCSController extends BaseController{
 	 * 提交至终审
 	 * @return
 	 */
-	@RequestMapping("submitZS.do")
+	@RequestMapping("submitDtwZS.do")
 	@ResponseBody
-	public String submitZS(HttpSession session,String dm) {
+	public String submitDtwZS(HttpSession session,String dm) {
 		String czr = getUname(session);
 		try {
-			twcsService.submitZS(dm,czr);
+			twcsService.submitDtwZS(dm,czr);
 		} catch (OperException e) {
 			return e.getMessage();
 		}
@@ -89,12 +89,12 @@ public class TWCSController extends BaseController{
 		return ROOT_URL+"/dtw/revertDtwUI";
 	}
 	
-	@RequestMapping("revert.do")
+	@RequestMapping("revertDtw.do")
 	@ResponseBody
-	public String revert(HttpSession session,String dm,String remark) {
+	public String revertDtw(HttpSession session,String dm,String remark) {
 		String czr = getUname(session);
 		try {
-			twcsService.revert(dm, czr, remark);
+			twcsService.revertDtw(dm, czr, remark);
 		} catch (OperException e) {
 			return e.getMessage();
 		}
@@ -124,4 +124,50 @@ public class TWCSController extends BaseController{
 		}
 		return datagrid;
 	}
+	
+	@RequestMapping("previewXtwUI.do")
+	public String previewXtwUI (Model model,Integer id){
+		VNews vnews = new VNews();
+		vnews.setId(id);
+		model.addAttribute("previewNews", twsjService.getVNews(vnews));
+		return ROOT_URL+"/xtw/previewXtwUI";
+	}
+	
+	/**
+	 * 提交至终审
+	 * @return
+	 */
+	@RequestMapping("submitXtwZS.do")
+	@ResponseBody
+	public String submitXtwZS(HttpSession session,String dm) {
+		String czr = getUname(session);
+		try {
+			twcsService.submitXtwZS(dm,czr);
+		} catch (OperException e) {
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 驳回小图文申请
+	 * @return
+	 */
+	@RequestMapping("revertXtwUI.do")
+	public String revertXtwUI () {
+		return ROOT_URL+"/xtw/revertXtwUI";
+	}
+	
+	@RequestMapping("revertXtw.do")
+	@ResponseBody
+	public String revertXtw(HttpSession session,String dm,String remark) {
+		String czr = getUname(session);
+		try {
+			twcsService.revertXtw(dm, czr, remark);
+		} catch (OperException e) {
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
 }

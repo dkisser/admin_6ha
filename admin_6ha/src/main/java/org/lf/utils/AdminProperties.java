@@ -49,4 +49,6 @@ public class AdminProperties {
 	
 	public static final String SERVER_URL = AdminProperties.getValue("server_url");
 	
+	public static final String PIC_TEMP_DIR = AdminProperties.getValue("pic_temp_targDir");
+	
 }

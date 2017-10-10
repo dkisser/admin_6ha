@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td style="width: 560px;"></td>
       <td>申请人:</td><td><input id="xtwzsUI_sqrtxb" name="sqr" style="width: 120px;"/></td>
       <td style="padding-left: 10px;">标    题:</td><td><input id="xtwzsUI_titletxb" name="title" style="width: 120px;"/></td>
-      <td style="padding-left: 20px;"><a class="easyui-linkbutton" onclick="xtwzsUI.query()">查询</a></td>
+      <td style="padding-left: 20px;"><a class="easyui-linkbutton" onclick="xtwzsUI.query()" data-options="iconCls:'icon-search'">查询</a></td>
     </tr>
   </table>
   <div id="dgxtwzsUI" fit="true"></div>
@@ -69,45 +69,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		preview:function (index) {
 			var xtwzsUI_previewRow = $("#dgxtwzsUI").datagrid('getData').rows[index];
-			xtwzsUI.genBigDialog("xtwzsUI_newPreviewDlg", "新闻预览", getContextPath() + "/admin/twzs/previewDtwUI.do",{id:xtwzsUI_previewRow.id});
+			xtwzsUI.genBigDialog("xtwzsUI_newPreviewDlg", "新闻预览", getContextPath() + "/admin/twzs/previewXtwUI.do",{id:xtwzsUI_previewRow.id});
 		},
 		ground:function (index) {
-			var xtwzsUI_submitZSRow = $("#dgxtwzsUI").datagrid('getData').rows[index];
-			layui.use('layer',function () {
-				var layer = layui.layer;
-				layer.msg('您确定要将该新闻上架吗?',{
-					time: 10000, //10S后关闭
-					btn:['是的','算了'],
-					yes:function () {
-						$.ajax({
-							url: getContextPath() +"/admin/twzs/groundNews.do",
-							cache:false,
-							data:{dm:xtwzsUI_submitZSRow.dm},
-							dataType:"json",
-							method:"POST",
-							success:function (res) {
-								$("#dgxtwzsUI").datagrid("reload");
-								if ( res == "success") {
-			    	 				layer.msg('操作成功',{
-			    	 					time: 1000,
-			    	 				});
-			    	 			} else {
-			    	 				layer.alert(res,{title:'发生了一个错误'});
-			    	 			}
-							},
-							error:function () {
-								alert("Ajax error!");
-							}
-						});
-					},
-					btn2:function (index) {
-					}
-				});
-			});
+			xtwzsUI_submitZSRow = $("#dgxtwzsUI").datagrid('getData').rows[index];
+			xtwzsUI.genSmallDialog("xtwzsUI_newGroundDlg", "请选择一个新闻下架", getContextPath() + "/admin/twzs/chooseXtwUI.do");
 		},
 		revert:function (index) {
 			xtwzsUI_revertRow = $("#dgxtwzsUI").datagrid('getData').rows[index];
-			xtwzsUI.genSmallDialog("xtwzsUI_newRevertDlg", "终审失败", getContextPath() + "/admin/twzs/revertDtwUI.do");
+			xtwzsUI.genSmallDialog("xtwzsUI_newRevertDlg", "终审失败", getContextPath() + "/admin/twzs/revertXtwUI.do");
 		}
 			
 	};

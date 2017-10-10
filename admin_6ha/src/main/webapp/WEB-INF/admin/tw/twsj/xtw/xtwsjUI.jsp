@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <table id="xtwsjUI_toolbar" style="width:100%;">
     <tr style="height:30px;"><td><a class="easyui-linkbutton" data-options="iconCls:'icon-add',iconAlign:'left',plain:true" onclick="xtwsjUI.add()">新增</a></td></tr>
   </table>
-  <div id="xtwsjUI_dgdtwList" fit="true"></div>
+  <div id="xtwsjUI_dgxtwList" fit="true"></div>
 </div>
 <script type="text/javascript">
 	var xtwsjUI = {
@@ -58,16 +58,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		
 		add:function () {
-			xtwsjUI.createBigDialog("xtwsjUI_newAddDlg", "新增大图文", getContextPath() + "/admin/twsj/addDtwUI.do", {});
+			xtwsjUI.createBigDialog("xtwsjUI_newAddDlg", "新增大图文", getContextPath() + "/admin/twsj/addXtwUI.do", {});
 		},
 		
 		edit:function (index) {
-			var xtwsjUI_editRow = $("#xtwsjUI_dgdtwList").datagrid("getData").rows[index];
-			xtwsjUI.createBigDialog("xtwsjUI_newEditDlg", "修改图文页面", getContextPath() + "/admin/twsj/editDtwUI.do", {id:xtwsjUI_editRow.id});
+			xtwsjUI_editRow = $("#xtwsjUI_dgxtwList").datagrid("getData").rows[index];
+			xtwsjUI.createBigDialog("xtwsjUI_newEditDlg", "修改图文页面", getContextPath() + "/admin/twsj/editXtwUI.do", {id:xtwsjUI_editRow.id});
 		},
 		
 		del:function (index) {
-			var xtwsjUI_delRow = $("#xtwsjUI_dgdtwList").datagrid("getData").rows[index];
+			var xtwsjUI_delRow = $("#xtwsjUI_dgxtwList").datagrid("getData").rows[index];
 			layui.use('layer',function () {
 				var layer = layui.layer;
 				layer.msg('您确定要删除该记录吗?',{
@@ -75,14 +75,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					btn:['是的','算了'],
 					yes:function () {
 						$.ajax({
-							url: getContextPath() + "/admin/twsj/delDtw.do",
+							url: getContextPath() + "/admin/twsj/delXtw.do",
 							type: "post",
 							data:{twdm:xtwsjUI_delRow.dm},
 							dataType:"json",
 							async:false,
 							cache:false,
 							success:function (res) {
-								$("#xtwsjUI_dgdtwList").datagrid('reload');
+								$("#xtwsjUI_dgxtwList").datagrid('reload');
 								if ( res == "success") {
 			    	 				layer.msg('操作成功',{
 			    	 					time: 1000,
@@ -101,8 +101,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 			});
 		},
-		sjDtw: function (index) {
-			var xtwsjUI_sjRow = $("#xtwsjUI_dgdtwList").datagrid("getData").rows[index];
+		sjXtw: function (index) {
+			var xtwsjUI_sjRow = $("#xtwsjUI_dgxtwList").datagrid("getData").rows[index];
 			layui.use('layer',function () {
 				var layer = layui.layer;
 				layer.msg('您确定要上架该新闻吗?',{
@@ -110,14 +110,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					btn:['是的','算了'],
 					yes:function () {
 						$.ajax({
-							url: getContextPath() + "/admin/twsj/sjDtw.do",
+							url: getContextPath() + "/admin/twsj/sjXtw.do",
 							type: "post",
 							data:{twdm:xtwsjUI_sjRow.dm},
 							dataType:"json",
 							async:false,
 							cache:false,
 							success:function (res) {
-								$("#xtwsjUI_dgdtwList").datagrid('reload');
+								$("#xtwsjUI_dgxtwList").datagrid('reload');
 								if ( res == "success") {
 			    	 				layer.msg('操作成功',{
 			    	 					time: 1000,
@@ -148,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		cache:false
 	});
 	
-	$("#xtwsjUI_dgdtwList").datagrid({
+	$("#xtwsjUI_dgxtwList").datagrid({
 		url:getContextPath() + "/admin/twsj/getXtwList.do",
 		toolbar: "#xtwsjUI_toolbar",
 		pagination : true, //是否有分页工具
@@ -215,9 +215,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    		if (row.zt==1 || row.zt==2) {
 		    			return '';
 		    		} else if (row.zt == 4 || row.zt==5 || row.zt==6) {
-		    			return '<a class="xtwsjUI_cxsjBtn" onclick="xtwsjUI.sjDtw('+index+')">重新上架</a>&nbsp;<a class="xtwsjUI_editBtn" onclick="xtwsjUI.edit('+index+')">修改</a>&nbsp;<a class="xtwsjUI_delBtn" onclick="xtwsjUI.del('+index+')">删除</a>';
+		    			return '<a class="xtwsjUI_cxsjBtn" onclick="xtwsjUI.sjXtw('+index+')">重新上架</a>&nbsp;<a class="xtwsjUI_editBtn" onclick="xtwsjUI.edit('+index+')">修改</a>&nbsp;<a class="xtwsjUI_delBtn" onclick="xtwsjUI.del('+index+')">删除</a>';
 		    		} else if (row.zt == 7) {
-		    			return '<a class="xtwsjUI_cxsjBtn" onclick="xtwsjUI.sjDtw('+index+')">上架</a>&nbsp;<a class="xtwsjUI_editBtn" onclick="xtwsjUI.edit('+index+')">修改</a>&nbsp;<a class="xtwsjUI_delBtn" data-method="confirm" onclick="xtwsjUI.del('+index+')">删除</a>';
+		    			return '<a class="xtwsjUI_cxsjBtn" onclick="xtwsjUI.sjXtw('+index+')">上架</a>&nbsp;<a class="xtwsjUI_editBtn" onclick="xtwsjUI.edit('+index+')">修改</a>&nbsp;<a class="xtwsjUI_delBtn" data-method="confirm" onclick="xtwsjUI.del('+index+')">删除</a>';
 		    		}
 		    	}
 		     }

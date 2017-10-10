@@ -7,6 +7,7 @@ import org.lf.admin.db.pojo.VNews;
 import org.lf.admin.service.OperException;
 import org.lf.admin.service.XWLX;
 import org.lf.admin.service.tw.TWSJService;
+import org.lf.utils.AdminProperties;
 import org.lf.utils.EasyuiDatagrid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,7 +56,7 @@ public class TWSJController extends BaseController{
 		return ROOT_URL+"/dtw/addDtwUI";
 	}
 	/**
-	 * 大图文上架-图片上传
+	 * 图片上传
 	 * @param session
 	 * @param file
 	 * @return
@@ -64,7 +65,7 @@ public class TWSJController extends BaseController{
 	@ResponseBody
 	public JSONObject uploadPic(HttpSession session,@RequestParam(value="file",required=false)MultipartFile file) {
 		
-		return twsjService.uploadPic(file, session);
+		return twsjService.uploadPic(file, session,AdminProperties.PIC_TEMP_DIR);
 	}
 	/**
 	 * 大图文上架-新增
@@ -159,7 +160,6 @@ public class TWSJController extends BaseController{
 		return SUCCESS;
 	}
 	
-	//TODO
 	/**
 	 *小图文上架
 	 * @return
@@ -178,4 +178,101 @@ public class TWSJController extends BaseController{
 		return twsjService.newsList(news, rows, page);
 	}
 	
+	@RequestMapping("addXtwUI.do")
+	public String addXtwUI () {
+		return ROOT_URL+"/xtw/addXtwUI";
+	}
+	
+	/**
+	 * 小图文上架-新增
+	 * @param session
+	 * @param id
+	 * @param title
+	 * @param content
+	 * @param pic
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping("addXtw.do")
+	@ResponseBody
+	public String addXtw(HttpSession session,Integer id,String title,String content,
+			@RequestParam(value="pic",required=false)MultipartFile pic,
+			@RequestParam(value="file",required=false)MultipartFile file) {
+		String czr = getUname(session);
+		try {
+			twsjService.addXtw(session,czr,title, content,pic);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	@RequestMapping("editXtwUI.do")
+	public String editXtwUI (Model model,Integer id){
+		VNews vnews = new VNews();
+		vnews.setId(id);
+		model.addAttribute("editNews", twsjService.getVNews(vnews));
+		return ROOT_URL+"/xtw/editXtwUI";
+	}
+	/**
+	 * 小图文上架-编辑
+	 * @param session
+	 * @param twdm
+	 * @param title
+	 * @param content
+	 * @param pic
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping("editXtw.do")
+	@ResponseBody
+	public String editXtw(HttpSession session,String twdm,String title,String content,
+			@RequestParam(value="pic",required=false)MultipartFile pic,
+			@RequestParam(value="file",required=false)MultipartFile file) {
+		String czr = getUname(session);
+		try {
+			twsjService.editXtw(session, twdm,czr, title, content, pic);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	/**
+	 * 小图文上架-删除
+	 * @param twdm
+	 * @return
+	 */
+	@RequestMapping("delXtw.do")
+	@ResponseBody
+	public String delXtw(String twdm) {
+		try {
+			twsjService.delXtw(twdm);
+			
+		} catch (OperException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 小图文上架-上架（重新上架）
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("sjXtw.do")
+	@ResponseBody
+	public String sjXtw(HttpSession session,String twdm) {
+		String czr = getUname(session);
+		try {
+			twsjService.sjXtw(twdm, czr);
+		} catch (OperException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
 }

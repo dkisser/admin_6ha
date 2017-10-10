@@ -180,7 +180,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 获得当前时间字符串
+	 * 获得当前时间字符串  格式为：yyyy-MM-dd HH:mm:ss
 	 * 
 	 * @return
 	 */

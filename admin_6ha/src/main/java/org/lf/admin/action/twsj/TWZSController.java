@@ -70,7 +70,7 @@ public class TWZSController extends BaseController{
 	public String groundNews(HttpSession session,String dm) {
 		String czr = getUname(session);
 		try {
-			twzsService.groundNews(dm,czr);
+			twzsService.groundDtwNews(dm,czr);
 		} catch (OperException e) {
 			return e.getMessage();
 		}
@@ -86,12 +86,12 @@ public class TWZSController extends BaseController{
 		return ROOT_URL+"/dtw/revertDtwUI";
 	}
 	
-	@RequestMapping("revert.do")
+	@RequestMapping("revertDtw.do")
 	@ResponseBody
-	public String revert(HttpSession session,String dm,String remark) {
+	public String revertDtw(HttpSession session,String dm,String remark) {
 		String czr = getUname(session);
 		try {
-			twzsService.revert(dm, czr, remark);
+			twzsService.revertDtw(dm, czr, remark);
 		} catch (OperException e) {
 			return e.getMessage();
 		}
@@ -119,5 +119,69 @@ public class TWZSController extends BaseController{
 			e.printStackTrace();
 		}
 		return newsList;
+	}
+	
+	@RequestMapping("previewXtwUI.do")
+	public String previewXtwUI (Model model,Integer id) {
+		VNews vnews = new VNews();
+		vnews.setId(id);
+		model.addAttribute("previewNews", twsjService.getVNews(vnews));
+		return ROOT_URL+"/xtw/previewXtwUI";
+	}
+	
+	/**
+	 * 提交至终审
+	 * @return
+	 */
+	@RequestMapping("groundXtwNews.do")
+	@ResponseBody
+	public String groundXtwNews(HttpSession session,String dm,String replaceDm) {
+		String czr = getUname(session);
+		try {
+			twzsService.groundXtwNews(dm,czr,replaceDm);
+		} catch (OperException e) {
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 驳回小图文申请
+	 * @return
+	 */
+	@RequestMapping("revertXtwUI.do")
+	public String revertXtwUI () {
+		return ROOT_URL+"/xtw/revertXtwUI";
+	}
+	
+	@RequestMapping("revertXtw.do")
+	@ResponseBody
+	public String revertXtw(HttpSession session,String dm,String remark) {
+		String czr = getUname(session);
+		try {
+			twzsService.revertXtw(dm, czr, remark);
+		} catch (OperException e) {
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 选择一个现有的新闻替换下来
+	 * @return
+	 */
+	@RequestMapping("chooseXtwUI.do")
+	public String chooseXtwUI () {
+		return ROOT_URL+"/xtw/chooseXtwUI";
+	}
+	
+	/**
+	 * 得到当前所有的正在上架中的小图文
+	 * @return
+	 */
+	@RequestMapping("chooseXtwList.do")
+	@ResponseBody
+	public EasyuiDatagrid<VNews> chooseXtwList (int page,int rows) {
+		return twzsService.chooseXtwList(page, rows);
 	}
 }

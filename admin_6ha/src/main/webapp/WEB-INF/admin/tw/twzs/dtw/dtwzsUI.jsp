@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td style="width: 560px;"></td>
       <td>申请人:</td><td><input id="dtwzsUI_sqrtxb" name="sqr" style="width: 120px;"/></td>
       <td style="padding-left: 10px;">标    题:</td><td><input id="dtwzsUI_titletxb" name="title" style="width: 120px;"/></td>
-      <td style="padding-left: 20px;"><a class="easyui-linkbutton" onclick="dtwzsUI.query()">查询</a></td>
+      <td style="padding-left: 20px;"><a class="easyui-linkbutton" onclick="dtwzsUI.query()" data-options="iconCls:'icon-search'">查询</a></td>
     </tr>
   </table>
   <div id="dgdtwzsUI" fit="true"></div>
@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					btn:['是的','算了'],
 					yes:function () {
 						$.ajax({
-							url: getContextPath() +"/admin/twzs/groundNews.do",
+							url: getContextPath() +"/admin/twzs/groundDtwNews.do",
 							cache:false,
 							data:{dm:dtwzsUI_submitZSRow.dm},
 							dataType:"json",

@@ -1,0 +1,97 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' content='IE=edge'><title>2017年10月10日12:47:56测试数据0001——文臣</title></head><body><h4 align="left">属性</h4><p align="left">所有的属性都定义在jQuery.fn.<strong><font color="#0000ff">{plugin}</font></strong>.defaults里面。例如，对话框属性定义在jQuery.fn.<strong><font color="#0000ff">dialog</font></strong>.defaults里面。</p><h4 align="left">事件</h4><p align="left">所有的事件（回调函数）也都定义在jQuery.fn.<strong><font color="#0000ff">{plugin}</font></strong>.defaults里面。</p><h4 align="left">方法</h4><p align="left">调用方法的语法：$('selector').plugin('method', parameter); </p><p align="left">解释： 
+</p><p align="left">
+</p><ul>
+<li>
+<div align="left"><span>selector</span> 是jQery对象选择器。</div>
+</li><li>
+<div align="left"><span>plugin</span> 是插件的名称。</div>
+</li><li>
+<div align="left"><span>method</span> 是相应插件现有的方法。</div>
+</li><li>
+<div align="left"><span>parameter</span> 
+是参数对象，可以是一个对象、字符串等。</div></li></ul><p align="left">所有方法都定义在jQuery.fn.<strong><font color="#0000ff">{plugin}</font></strong>.methods。每个方法都有2个参数：jq和param。第一个参数'jq'是必须的，这是指的jQuery对象。第二个参数'param'是指传入方法的实际参数。例如，为dialog组件扩展一个方法名为'mymove'，代码如下：</p><div align="left">
+<div class="dp-highlighter">
+<div class="bar">
+<div class="tools"></div></div>
+<ol class="dp-c">
+<li class="alt">$.extend($.fn.dialog.methods, {    
+</li><li>    mymove: <span class="keyword">function</span>(jq, newposition){    
+</li><li class="alt">        <span class="keyword">return</span> jq.each(<span class="keyword">function</span>(){    
+</li><li>            $(<span class="keyword">this</span>).dialog(<span class="string">'move'</span>, newposition);    
+</li><li class="alt">        });    
+</li><li>    }    
+</li><li class="alt">});  </li></ol></div></div><div align="left"><pre class="javascript" name="code-welcome">$.extend($.fn.dialog.methods, {
+    mymove: function(jq, newposition){
+        return jq.each(function(){
+            $(this).dialog('move', newposition);
+        });
+    }
+});
+</pre></div><p align="left">现在你可以调用'mymove'方法将对话框移动到指定位置：</p><p>
+
+
+
+
+
+
+
+
+
+
+</p><div align="left">
+<div class="dp-highlighter">
+<div class="bar">
+<div class="tools"></div></div>
+<ol class="dp-c">
+<li class="alt">$(<span class="string">'#dd'</span>).dialog(<span class="string">'mymove'</span>, {    
+</li><li>    left: 200,    
+</li><li class="alt">    top: 100    
+</li></ol><p><ol class="dp-c"><li>});</li></ol></p><h4 align="left">属性</h4><ol class="dp-c"><li>
+<p align="left">所有的属性都定义在jQuery.fn.<strong><font color="#0000ff">{plugin}</font></strong>.defaults里面。例如，对话框属性定义在jQuery.fn.<strong><font color="#0000ff">dialog</font></strong>.defaults里面。</p>
+<h4 align="left">事件</h4>
+<p align="left">所有的事件（回调函数）也都定义在jQuery.fn.<strong><font color="#0000ff">{plugin}</font></strong>.defaults里面。</p>
+<h4 align="left">方法</h4>
+<p align="left">调用方法的语法：$('selector').plugin('method', parameter); </p>
+<p align="left">解释： 
+</p><p align="left">
+</p><ul>
+<li>
+<div align="left"><span>selector</span> 是jQery对象选择器。</div>
+</li><li>
+<div align="left"><span>plugin</span> 是插件的名称。</div>
+</li><li>
+<div align="left"><span>method</span> 是相应插件现有的方法。</div>
+</li><li>
+<div align="left"><span>parameter</span> 
+是参数对象，可以是一个对象、字符串等。</div></li></ul>
+<p align="left">所有方法都定义在jQuery.fn.<strong><font color="#0000ff">{plugin}</font></strong>.methods。每个方法都有2个参数：jq和param。第一个参数'jq'是必须的，这是指的jQuery对象。第二个参数'param'是指传入方法的实际参数。例如，为dialog组件扩展一个方法名为'mymove'，代码如下：</p>
+<div align="left">
+<div class="dp-highlighter">
+<div class="bar">
+<div class="tools"></div></div>
+<ol class="dp-c">
+<li class="alt">$.extend($.fn.dialog.methods, {    
+</li><li>    mymove: <span class="keyword">function</span>(jq, newposition){    
+</li><li class="alt">        <span class="keyword">return</span> jq.each(<span class="keyword">function</span>(){    
+</li><li>            $(<span class="keyword">this</span>).dialog(<span class="string">'move'</span>, newposition);    
+</li><li class="alt">        });    
+</li><li>    }    
+</li><li class="alt">});  </li></ol></div></div>
+<div align="left"><pre class="javascript" name="code-welcome">$.extend($.fn.dialog.methods, {
+    mymove: function(jq, newposition){
+        return jq.each(function(){
+            $(this).dialog('move', newposition);
+        });
+    }
+});
+</pre></div>
+<p align="left">现在你可以调用'mymove'方法将对话框移动到指定位置：</p>
+<div align="left">
+<div class="dp-highlighter">
+<div class="bar">
+<div class="tools"></div></div>
+<ol class="dp-c">
+<li class="alt">$(<span class="string">'#dd'</span>).dialog(<span class="string">'mymove'</span>, {    
+</li><li>    left: 200,    
+</li><li class="alt">    top: 100    
+</li><li>});<img src="http://localhost:8080/admin_6ha/js/layui/images/face/25.gif" alt="[抱抱]"> &nbsp;<img src="http://localhost:8080/admin_6ha/js/layui/images/face/37.gif" alt="[色]"></li></ol></div></div>&nbsp;&nbsp;</li></ol></div></div></body></html>

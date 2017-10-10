@@ -15,5 +15,7 @@ public enum XWLX {
 	public int getValue(){
 		return value;
 	}
-	
+	public static XWZT valueOf(int value) {
+		return XWZT.values()[value];
+	}
 }
