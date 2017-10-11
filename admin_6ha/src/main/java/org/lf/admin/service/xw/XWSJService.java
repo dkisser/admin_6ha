@@ -33,9 +33,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class XWSJService {
 	
-	public static final OperErrCode 删除新闻失败 = new OperErrCode("030401", "删除新闻失败");
-	public static final OperErrCode 新增新闻失败 = new OperErrCode("030402", "新增新闻失败");
-	public static final OperErrCode 编辑新闻失败 = new OperErrCode("030403", "编辑新闻失败");
+	public static final OperErrCode 删除滚动新闻失败 = new OperErrCode("030401", "删除滚动新闻失败");
+	public static final OperErrCode 新增滚动新闻失败 = new OperErrCode("030402", "新增滚动新闻失败");
+	public static final OperErrCode 编辑滚动新闻失败 = new OperErrCode("030403", "编辑滚动新闻失败");
+	public static final OperErrCode 上架滚动新闻失败 = new OperErrCode("030404", "上架滚动新闻失败");
+	public static final OperErrCode 删除日看点新闻失败 = new OperErrCode("030401", "删除日看点新闻失败");
+	public static final OperErrCode 新增日看点新闻失败 = new OperErrCode("030402", "新增日看点新闻失败");
+	public static final OperErrCode 编辑日看点新闻失败 = new OperErrCode("030403", "编辑日看点新闻失败");
+	public static final OperErrCode 上架日看点新闻失败 = new OperErrCode("030404", "上架日看点新闻失败");
+	
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -61,7 +67,7 @@ public class XWSJService {
 			record = jNewsDao.select(record);
 			jNewsDao.deleteByPrimaryKey(record.getId());
 		} catch (Exception e) {
-			throw new OperException(删除新闻失败);
+			throw new OperException(删除滚动新闻失败);
 		}
 	}
 	
@@ -115,12 +121,12 @@ public class XWSJService {
 			lnews.setRemark(remarkSb.toString());
 			lNewsDao.insertSelective(lnews);
 		}catch (Exception e) {
-			throw new OperException(新增新闻失败);
+			throw new OperException(新增滚动新闻失败);
 		}
 		
 	}
 	
-	/**编辑大图文
+	/**编辑滚动新闻
 	 * 1.先将文件上传到服务器
 	 * 2.根据twdm更新jnews中的一条记录
 	 * 3.在l_news中插入一条记录：
@@ -174,9 +180,226 @@ public class XWSJService {
 			lNewsDao.insertSelective(lnews);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new OperException(编辑新闻失败);
+			throw new OperException(编辑滚动新闻失败);
 		}
 		
 	}
 	
+	/**
+	 * 滚动新闻上架
+	 * @param twdm
+	 * @param czr
+	 * @return
+	 * 
+	 * 1.将j_news中的记录的状态变为一审中
+	 * 2.在l_news中插入一条记录：
+	 * date: 当前系统时间
+	 * dm ： twdm
+	 * czr: 当前用户的uname（czr）
+	 * oldzt: null
+	 * newzt: 一审中
+	 * remark:滚动新闻（<twdm>）与<系统时间>被提交，现处于一审中
+	 * @throws OperException 
+	 */
+	@Transactional(rollbackFor=Exception.class)
+	public void sjGdxw (String dm,String czr) throws OperException {
+		try {
+			//将zt改为一审中
+			JNews record = new JNews();
+			record.setDm(dm);
+			record = jNewsDao.select(record);
+			LNews lnews =new LNews();
+			lnews.setOldZt(record.getZt());
+			record.setZt(XWZT.一审中.getValue());
+			jNewsDao.updateByPrimaryKey(record);
+			
+			//在l_record中插入相关记录
+			lnews.setDate(new Date());
+			lnews.setDm(dm);
+			lnews.setCzr(czr);
+			lnews.setNewZt(XWZT.一审中.getValue());
+			StringBuilder resultSb = new StringBuilder();
+			resultSb.append("滚动新闻（").append(dm).append("）");
+			resultSb.append("于").append(StringUtils.getCurrTime()).append("被").append(czr).append("提交，现处于").append(XWZT.一审中);
+			lnews.setRemark(resultSb.toString());
+			lNewsDao.insertSelective(lnews);
+		} catch (Exception e) {
+			throw new OperException(上架滚动新闻失败);
+		}
+		
+	}
+	
+	/**新增日看点新闻
+	 * 1.先将文件上传到服务器
+	 * 2.在jnews中插入一条记录
+	 * 3.在l_news中插入一条记录：
+	 * dm：dm
+	 * czr:当前用户
+	 * old_zt:null
+	 * new_zt:编辑中
+	 * remark:日看点新闻（<dm>）于<系统时间>被<czr>提交，现处于<当前状态>。
+	 * @param session
+	 * @param czr
+	 * @param title
+	 * @param content
+	 * @param file
+	 * @throws IOException
+	 * @throws OperException 
+	 */
+	@Transactional(rollbackFor=Exception.class)
+	public void addRkdxw (HttpSession session,String czr,String title,String content) throws IOException, OperException {
+		User user = (User)session.getAttribute(Constants.ADMIN_LOGIN_INFO);
+		ServletContext servletContext = session.getServletContext();
+		String serverRealPath = servletContext.getRealPath("");
+		String filePath = String.format(AdminProperties.RKDXW_HTML_TARGDIR, sdf.format(new Date()));
+		String fileName = StringUtils.getShortUUID()+".html";
+		//生成对应的html文件
+		AdminUtils.genHtml(content, title, serverRealPath+filePath, fileName);
+		try {
+			//在jnew中插入记录
+			JNews news = new JNews();
+			news.setLx(XWLX.日看点左侧新闻.getValue());
+			news.setDm(DateUtils.toLong(new Date())+"");
+			news.setTitle(title);
+			news.setSqr(user.getUname());
+			news.setHref(AdminProperties.SERVER_URL+filePath+"/"+fileName);
+			news.setZt(XWZT.编辑中.getValue());
+			news.setRemark(content.getBytes("utf-8"));
+			jNewsDao.insertSelective(news);
+			//在l_news中插入一条记录
+			LNews lnews= new LNews();
+			lnews.setDm(news.getDm());
+			lnews.setCzr(czr);
+			lnews.setOldZt(null);
+			lnews.setNewZt(XWZT.编辑中.getValue());
+			StringBuilder remarkSb = new StringBuilder();
+			remarkSb.append("日看点新闻").append("(").append(news.getDm()).append(")");
+			remarkSb.append("于").append(DateUtils.toString(new Date())).append("被").append(czr).append("提交，");
+			remarkSb.append("现处于").append(XWZT.编辑中);
+			lnews.setRemark(remarkSb.toString());
+			lNewsDao.insertSelective(lnews);
+		}catch (Exception e) {
+			throw new OperException(新增日看点新闻失败);
+		}
+	}
+	
+	/** 删除日看点新闻
+	 * 根据穿过来的dm找到对应的id然后删除
+	 * @param twdm
+	 * @return
+	 * @throws OperException 
+	 */
+	public void delRkdxw (String dm) throws OperException {
+		try {
+			JNews record = new JNews();
+			record.setDm(dm);
+			record = jNewsDao.select(record);
+			jNewsDao.deleteByPrimaryKey(record.getId());
+		} catch (Exception e) {
+			throw new OperException(删除日看点新闻失败);
+		}
+	}
+	
+	/**编辑滚动新闻
+	 * 1.先将文件上传到服务器
+	 * 2.根据twdm更新jnews中的一条记录
+	 * 3.在l_news中插入一条记录：
+	 * dm：dm
+	 * czr:当前用户
+	 * old_zt:当前状态
+	 * new_zt:当前状态
+	 * remark:日看点新闻（<dm>）于<系统时间>被<czr>进行修改，现处于<当前状态>状态。
+	 * @param session
+	 * @param czr
+	 * @param title
+	 * @param content
+	 * @param file
+	 * @throws IOException
+	 * @throws OperException 
+	 */
+	@Transactional(rollbackFor=Exception.class)
+	public void editRkdxw (HttpSession session,String dm,String title,String czr,String content) throws IOException, OperException {
+		//将图片上传，然后返回图片的相关信息
+		User user = (User)session.getAttribute(Constants.ADMIN_LOGIN_INFO);
+		ServletContext servletContext = session.getServletContext();
+		String serverRealPath = servletContext.getRealPath("");
+		//html的路径
+		String filePath = String.format(AdminProperties.RKDXW_HTML_TARGDIR, sdf.format(new Date()));
+		//html的名字
+		String fileName = StringUtils.getShortUUID()+".html";
+		//生成对应的html文件
+		AdminUtils.genHtml(content, title, serverRealPath+filePath, fileName);
+		try {
+			//更新jnews
+			JNews record = new JNews();
+			record.setDm(dm);
+			record = jNewsDao.select(record);
+			record.setDm(dm);
+			record.setTitle(title);
+			record.setSqr(user.getUname());
+			record.setHref(AdminProperties.SERVER_URL+filePath+"/"+fileName);
+			record.setRemark(content.getBytes("utf-8"));
+			jNewsDao.updateByPrimaryKeySelective(record);
+			//在l_news中插入一条记录
+			LNews lnews= new LNews();
+			lnews.setDm(dm);
+			lnews.setCzr(czr);
+			lnews.setOldZt(record.getZt());
+			lnews.setNewZt(record.getZt());
+			StringBuilder remarkSb = new StringBuilder();
+			remarkSb.append("日看点新闻").append("(").append(record.getDm()).append(")");
+			remarkSb.append("于").append(DateUtils.toString(new Date())).append("被").append(czr);
+			remarkSb.append("进行修改，现处于").append(XWZT.valueOf(record.getZt()-1)).append("状态");
+			lnews.setRemark(remarkSb.toString());
+			lNewsDao.insertSelective(lnews);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new OperException(编辑日看点新闻失败);
+		}
+		
+	}
+	
+	/**
+	 * 滚动新闻上架
+	 * @param twdm
+	 * @param czr
+	 * @return
+	 * 
+	 * 1.将j_news中的记录的状态变为一审中
+	 * 2.在l_news中插入一条记录：
+	 * date: 当前系统时间
+	 * dm ： twdm
+	 * czr: 当前用户的uname（czr）
+	 * oldzt: null
+	 * newzt: 一审中
+	 * remark:日看点新闻（<twdm>）与<系统时间>被提交，现处于一审中
+	 * @throws OperException 
+	 */
+	@Transactional(rollbackFor=Exception.class)
+	public void sjRkdxw (String dm,String czr) throws OperException {
+		try {
+			//将zt改为一审中
+			JNews record = new JNews();
+			record.setDm(dm);
+			record = jNewsDao.select(record);
+			LNews lnews =new LNews();
+			lnews.setOldZt(record.getZt());
+			record.setZt(XWZT.一审中.getValue());
+			jNewsDao.updateByPrimaryKey(record);
+			
+			//在l_record中插入相关记录
+			lnews.setDate(new Date());
+			lnews.setDm(dm);
+			lnews.setCzr(czr);
+			lnews.setNewZt(XWZT.一审中.getValue());
+			StringBuilder resultSb = new StringBuilder();
+			resultSb.append("日看点新闻（").append(dm).append("）");
+			resultSb.append("于").append(StringUtils.getCurrTime()).append("被").append(czr).append("提交，现处于").append(XWZT.一审中);
+			lnews.setRemark(resultSb.toString());
+			lNewsDao.insertSelective(lnews);
+		} catch (Exception e) {
+			throw new OperException(上架日看点新闻失败);
+		}
+		
+	}
 }

@@ -161,7 +161,7 @@ public class TWZSService {
 			news.setNewZt(XWZT.上架中.getValue());
 			news.setDate(new Date());
 			StringBuilder remarkSb = new StringBuilder();
-			remarkSb.append("大图文").append("(").append(dm).append(")");
+			remarkSb.append("小图文").append("(").append(dm).append(")");
 			remarkSb.append("于").append(DateUtils.toString(new Date())).append("被提交，经").append(czr);
 			remarkSb.append("审批通过，现处于").append(XWZT.上架中);
 			news.setRemark(remarkSb.toString());
@@ -174,7 +174,7 @@ public class TWZSService {
 			oldnews.setNewZt(XWZT.上架中.getValue());
 			oldnews.setDate(new Date());
 			StringBuilder remarkSb_old = new StringBuilder();
-			remarkSb_old.append("大图文").append("(").append(dm).append(")");
+			remarkSb_old.append("小图文").append("(").append(dm).append(")");
 			remarkSb_old.append("于").append(DateUtils.toString(new Date())).append("经").append(czr);
 			remarkSb_old.append("审批下架，现处于").append(XWZT.已过期);
 			oldnews.setRemark(remarkSb_old.toString());
@@ -187,7 +187,7 @@ public class TWZSService {
 	}
 	
 	/**
-	 * 驳回提交的news
+	 * 驳回提交的大图文news
 	 * 1.将该news的状态修改二审失败状态
 	 * 2.在l_news中插入一条记录：
 	 * dm
@@ -227,7 +227,7 @@ public class TWZSService {
 	}
 	
 	/**
-	 * 驳回提交的news
+	 * 驳回提交的小图文news
 	 * 1.将该news的状态修改二审失败状态
 	 * 2.在l_news中插入一条记录：
 	 * dm

@@ -13,23 +13,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
 <body>
-    <div id="dgchooseXtw" fit=true></div>
+    <div id="dgchooseRkdxw" fit=true></div>
 <script type="text/javascript">
-	var chooseXtwUI = {
+	var chooseRkdxwUI = {
 			
-		groundXtw:function (index) {
-			var chooseRow = $("#dgchooseXtw").datagrid('getData').rows[index];
+		ground:function (index) {
+			var chooseRow = $("#dgchooseRkdxw").datagrid('getData').rows[index];
 			layui.use('layer',function () {
 				var layer = layui.layer;
 				$.ajax({
-					url:getContextPath() + "/admin/twzs/groundXtwNews.do",
+					url:getContextPath() + "/admin/xwzs/groundRkdxwNews.do",
 					method:"POST",
 					cache:false,
-					data:{dm:xtwzsUI_submitZSRow.dm,replaceDm:chooseRow.dm},
+					data:{dm:rkdxwzsUI_submitZSRow.dm,replaceDm:chooseRow.dm},
 					dataType:"json",
 					success:function (res) {
-						$("#xtwzsUI_newGroundDlg").dialog('close');
-						$("#dgxtwzsUI").datagrid("reload");
+						$("#rkdxwzsUI_newGroundDlg").dialog('close');
+						$("#dgrkdxwzsUI").datagrid("reload");
 						if ( res == "success") {
 	    	 				layer.msg('操作成功',{
 	    	 					time: 1000,
@@ -46,12 +46,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		},
 		cancel: function () {
-			$("#xtwzsUI_newGroundDlg").dialog('close');
+			$("#rkdxwzsUI_newGroundDlg").dialog('close');
 		}
 	};
 	
-	$("#dgchooseXtw").datagrid({
-		url:getContextPath() + "/admin/twzs/chooseXtwList.do",
+	$("#dgchooseRkdxw").datagrid({
+		url:getContextPath() + "/admin/xwzs/chooseRkdxwList.do",
 		pagination : true, //是否有分页工具
 		pagePosition : "bottom", //分页工具位置
 		pageSize : 8, //分页默认大小
@@ -81,12 +81,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	width: '19%',
 		    	align:'center',
 				formatter:function(value,row,index) {
-		    		return "<a class='chooseXtwUI_lookBtn' onclick='chooseXtwUI.groundXtw("+index+")'>替换</a>";
+		    		return "<a class='chooseRkdxwUI_lookBtn' onclick='chooseRkdxwUI.ground("+index+")'>替换</a>";
 		    	}
 		     }
 		]],
 		onLoadSuccess: function () {
-			$(".chooseXtwUI_lookBtn").linkbutton({
+			$(".chooseRkdxwUI_lookBtn").linkbutton({
 				iconCls:'icon-search',
 				iconAlign:'left',
 				plain:true,

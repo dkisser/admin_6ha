@@ -68,7 +68,7 @@ public class XWSJController extends BaseController{
 	
 	@RequestMapping("addGdxwUI.do")
 	public String addGdxwUI(){
-		return ROOT_URL+"/gdxw/addGdxwUI";
+		return ROOT_URL+"/gdxw/addUI";
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class XWSJController extends BaseController{
 	 */
 	@RequestMapping("addGdxw.do")
 	@ResponseBody
-	public String addDtw(HttpSession session,Integer id,String title,String content) {
+	public String addGdxw(HttpSession session,Integer id,String title,String content) {
 		String czr = getUname(session);
 		try {
 			xwsjService.addGdxw(session, czr, title, content);
@@ -110,7 +110,7 @@ public class XWSJController extends BaseController{
 		VNews vnews = new VNews();
 		vnews.setId(id);
 		model.addAttribute("editNews", twsjService.getVNews(vnews));
-		return ROOT_URL+"/gdxw/editGdxwUI";
+		return ROOT_URL+"/gdxw/editUI";
 	}
 	
 	@RequestMapping("editGdxw.do")
@@ -125,6 +125,19 @@ public class XWSJController extends BaseController{
 			return e.getMessage();
 		}
 		return SUCCESS;
+	}
+	
+	@RequestMapping("sjGdxw.do")
+	@ResponseBody
+	public String sjGdxw(HttpSession session,String dm) {
+		String czr = getUname(session);
+		try {
+			xwsjService.sjGdxw(dm, czr);;
+		} catch (OperException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+		return  SUCCESS;
 	}
 	
 	/**
@@ -144,5 +157,96 @@ public class XWSJController extends BaseController{
 		news.setSqr(getUname(session));
 		return twsjService.newsList(news, rows, page);
 	}
+	
+	/**
+	 * 滚动新闻上架-删除
+	 * @param twdm
+	 * @return
+	 */
+	@RequestMapping("delRkdxw.do")
+	@ResponseBody
+	public String delRkdxw(String dm) {
+		try {
+			xwsjService.delGdxw(dm);
+		} catch (OperException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	@RequestMapping("addRkdxwUI.do")
+	public String addRkdxwUI(){
+		return ROOT_URL+"/rkdxw/addUI";
+	}
+	
+	/**
+	 * 滚动新闻上架-新增
+	 * @param session
+	 * @param id
+	 * @param title
+	 * @param content
+	 * @param pic
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping("addRkdxw.do")
+	@ResponseBody
+	public String addRkdxw(HttpSession session,Integer id,String title,String content) {
+		String czr = getUname(session);
+		try {
+			xwsjService.addRkdxw(session, czr, title, content);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
 
+	/**
+	 * 滚动新闻上架-编辑
+	 * @param session
+	 * @param twdm
+	 * @param title
+	 * @param content
+	 * @param pic
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping("editRkdxwUI.do")
+	public String editRkdxwUI (Model model,Integer id){
+		VNews vnews = new VNews();
+		vnews.setId(id);
+		model.addAttribute("editNews", twsjService.getVNews(vnews));
+		return ROOT_URL+"/rkdxw/editUI";
+	}
+	
+	@RequestMapping("editRkdxw.do")
+	@ResponseBody
+	public String editRkdxw(HttpSession session,String dm,String title,String content) {
+		String czr = getUname(session);
+		try {
+			xwsjService.editRkdxw(session, dm,title, czr, content);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	@RequestMapping("sjRkdxw.do")
+	@ResponseBody
+	public String sjRkdxw(HttpSession session,String dm) {
+		String czr = getUname(session);
+		try {
+			xwsjService.sjRkdxw(dm, czr);;
+		} catch (OperException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
+		return  SUCCESS;
+	}
+	
 }

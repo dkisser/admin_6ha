@@ -101,7 +101,7 @@ public class TWCSService {
 			news.setNewZt(XWZT.二审中.getValue());
 			news.setDate(new Date());
 			StringBuilder remarkSb = new StringBuilder();
-			remarkSb.append(XWLX.valueOf(record.getLx()-1)).append("(").append(dm).append(")");
+			remarkSb.append("大图文").append("(").append(dm).append(")");
 			remarkSb.append("于").append(DateUtils.toString(new Date())).append("经").append(czr);
 			remarkSb.append("审批通过，现处于").append(XWZT.二审中);
 			news.setRemark(remarkSb.toString());
@@ -153,7 +153,7 @@ public class TWCSService {
 	}
 	
 	/**
-	 * 驳回提交的news
+	 * 驳回提交的大图文news
 	 * 1.将该news的状态修改一审失败状态
 	 * 2.在l_news中插入一条记录：
 	 * dm
@@ -194,7 +194,7 @@ public class TWCSService {
 	}
 	
 	/**
-	 * 驳回提交的news
+	 * 驳回提交的小图文news
 	 * 1.将该news的状态修改一审失败状态
 	 * 2.在l_news中插入一条记录：
 	 * dm

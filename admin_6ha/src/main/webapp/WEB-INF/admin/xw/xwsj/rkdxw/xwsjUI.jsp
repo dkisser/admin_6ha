@@ -13,14 +13,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
 <body>
-<div id="dlggdxwsjUIMain">
-  <table id="gdxwsjUI_toolbar" style="width:100%;">
-    <tr style="height:30px;"><td><a class="easyui-linkbutton" data-options="iconCls:'icon-add',iconAlign:'left',plain:true" onclick="gdxwsjUI.add()">新增</a></td></tr>
+<div id="dlgrkdxwsjUIMain">
+  <table id="rkdxwsjUI_toolbar" style="width:100%;">
+    <tr style="height:30px;"><td><a class="easyui-linkbutton" data-options="iconCls:'icon-add',iconAlign:'left',plain:true" onclick="rkdxwsjUI.add()">新增</a></td></tr>
   </table>
-  <div id="gdxwsjUI_dgxwList" fit="true"></div>
+  <div id="rkdxwsjUI_dgxwList" fit="true"></div>
 </div>
 <script type="text/javascript">
-	var gdxwsjUI = {
+	var rkdxwsjUI = {
 		
 		createBigDialog: function (dialogId,title,href,params) {
 			var dialogObj = $("<div id=\""+dialogId+"\"></div>");
@@ -58,16 +58,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		
 		add:function () {
-			gdxwsjUI.createBigDialog("gdxwsjUI_newAddDlg", "新增滚动新闻", getContextPath() + "/admin/xwsj/addGdxwUI.do", {});
+			rkdxwsjUI.createBigDialog("rkdxwsjUI_newAddDlg", "新增滚动新闻", getContextPath() + "/admin/xwsj/addRkdxwUI.do", {});
 		},
 		
 		edit:function (index) {
-			gdxwsjUI_editRow = $("#gdxwsjUI_dgxwList").datagrid("getData").rows[index];
-			gdxwsjUI.createBigDialog("gdxwsjUI_newEditDlg", "修改新闻", getContextPath() + "/admin/xwsj/editGdxwUI.do", {id:gdxwsjUI_editRow.id});
+			rkdxwsjUI_editRow = $("#rkdxwsjUI_dgxwList").datagrid("getData").rows[index];
+			rkdxwsjUI.createBigDialog("rkdxwsjUI_newEditDlg", "修改新闻", getContextPath() + "/admin/xwsj/editRkdxwUI.do", {id:rkdxwsjUI_editRow.id});
 		},
 		
 		del:function (index) {
-			var gdxwsjUI_delRow = $("#gdxwsjUI_dgxwList").datagrid("getData").rows[index];
+			var rkdxwsjUI_delRow = $("#rkdxwsjUI_dgxwList").datagrid("getData").rows[index];
 			layui.use('layer',function () {
 				var layer = layui.layer;
 				layer.msg('您确定要删除该记录吗?',{
@@ -75,14 +75,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					btn:['是的','算了'],
 					yes:function () {
 						$.ajax({
-							url: getContextPath() + "/admin/xwsj/delGdxw.do",
+							url: getContextPath() + "/admin/xwsj/delRkdxw.do",
 							type: "post",
-							data:{dm:gdxwsjUI_delRow.dm},
+							data:{dm:rkdxwsjUI_delRow.dm},
 							dataType:"json",
 							async:false,
 							cache:false,
 							success:function (res) {
-								$("#gdxwsjUI_dgxwList").datagrid('reload');
+								$("#rkdxwsjUI_dgxwList").datagrid('reload');
 								if ( res == "success") {
 			    	 				layer.msg('操作成功',{
 			    	 					time: 1000,
@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		},
 		sjXw: function (index) {
-			var gdxwsjUI_sjRow = $("#gdxwsjUI_dgxwList").datagrid("getData").rows[index];
+			var rkdxwsjUI_sjRow = $("#rkdxwsjUI_dgxwList").datagrid("getData").rows[index];
 			layui.use('layer',function () {
 				var layer = layui.layer;
 				layer.msg('您确定要上架该新闻吗?',{
@@ -110,14 +110,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					btn:['是的','算了'],
 					yes:function () {
 						$.ajax({
-							url: getContextPath() + "/admin/xwsj/sjGdxw.do",
+							url: getContextPath() + "/admin/xwsj/sjRkdxw.do",
 							type: "post",
-							data:{dm:gdxwsjUI_sjRow.dm},
+							data:{dm:rkdxwsjUI_sjRow.dm},
 							dataType:"json",
 							async:false,
 							cache:false,
 							success:function (res) {
-								$("#gdxwsjUI_dgxwList").datagrid('reload');
+								$("#rkdxwsjUI_dgxwList").datagrid('reload');
 								if ( res == "success") {
 			    	 				layer.msg('操作成功',{
 			    	 					time: 1000,
@@ -139,8 +139,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 	};
 	
-	$("#dlggdxwsjUIMain").dialog({
-		title:"滚动新闻上架申请",
+	$("#dlgrkdxwsjUIMain").dialog({
+		title:"日看点新闻上架申请",
 		width: 1024,
 		height:600,
 		modal:true,
@@ -148,9 +148,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		cache:false
 	});
 	
-	$("#gdxwsjUI_dgxwList").datagrid({
-		url:getContextPath() + "/admin/xwsj/getGdxwList.do",
-		toolbar: "#gdxwsjUI_toolbar",
+	$("#rkdxwsjUI_dgxwList").datagrid({
+		url:getContextPath() + "/admin/xwsj/getRkdxwList.do",
+		toolbar: "#rkdxwsjUI_toolbar",
 		pagination : true, //是否有分页工具
 		pagePosition : "bottom", //分页工具位置
 		pageSize : 15, //分页默认大小
@@ -215,27 +215,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    		if (row.zt==1 || row.zt==2) {
 		    			return '';
 		    		} else if (row.zt == 4 || row.zt==5 || row.zt==6) {
-		    			return '<a class="gdxwsjUI_cxsjBtn" onclick="gdxwsjUI.sjXw('+index+')">重新上架</a>&nbsp;<a class="gdxwsjUI_editBtn" onclick="gdxwsjUI.edit('+index+')">修改</a>&nbsp;<a class="gdxwsjUI_delBtn" onclick="gdxwsjUI.del('+index+')">删除</a>';
+		    			return '<a class="rkdxwsjUI_cxsjBtn" onclick="rkdxwsjUI.sjXw('+index+')">重新上架</a>&nbsp;<a class="rkdxwsjUI_editBtn" onclick="rkdxwsjUI.edit('+index+')">修改</a>&nbsp;<a class="rkdxwsjUI_delBtn" onclick="rkdxwsjUI.del('+index+')">删除</a>';
 		    		} else if (row.zt == 7) {
-		    			return '<a class="gdxwsjUI_cxsjBtn" onclick="gdxwsjUI.sjXw('+index+')">上架</a>&nbsp;<a class="gdxwsjUI_editBtn" onclick="gdxwsjUI.edit('+index+')">修改</a>&nbsp;<a class="gdxwsjUI_delBtn" data-method="confirm" onclick="gdxwsjUI.del('+index+')">删除</a>';
+		    			return '<a class="rkdxwsjUI_cxsjBtn" onclick="rkdxwsjUI.sjXw('+index+')">上架</a>&nbsp;<a class="rkdxwsjUI_editBtn" onclick="rkdxwsjUI.edit('+index+')">修改</a>&nbsp;<a class="rkdxwsjUI_delBtn" data-method="confirm" onclick="rkdxwsjUI.del('+index+')">删除</a>';
 		    		}
 		    	}
 		     }
 		]],
 		onLoadSuccess: function () {
-			$(".gdxwsjUI_cxsjBtn").linkbutton({
+			$(".rkdxwsjUI_cxsjBtn").linkbutton({
 				iconCls:'icon-ok',
 				iconAlign:'left',
 				plain:true,
 				height: 23
 			});
-			$(".gdxwsjUI_editBtn").linkbutton({
+			$(".rkdxwsjUI_editBtn").linkbutton({
 				iconCls:'icon-edit',
 				iconAlign:'left',
 				plain:true,
 				height: 23
 			});
-			$(".gdxwsjUI_delBtn").linkbutton({
+			$(".rkdxwsjUI_delBtn").linkbutton({
 				iconCls:'icon-no',
 				iconAlign:'left',
 				plain:true,

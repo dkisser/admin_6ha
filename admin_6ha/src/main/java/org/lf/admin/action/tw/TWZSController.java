@@ -62,7 +62,7 @@ public class TWZSController extends BaseController{
 	}
 	
 	/**
-	 * 提交至终审
+	 * 上架
 	 * @return
 	 */
 	@RequestMapping("groundNews.do")

@@ -137,20 +137,20 @@ public class WebHomeServiceTest {
 	
 	@Test
 	public void insertTestData(){
-		GenJNewsTestData(5, XWZT.已过期, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.已过期, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.一审未通过, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.一审未通过, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.二审中, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.二审中, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.一审中, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.一审中, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.二审未通过, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.二审未通过, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.已过期, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.已过期, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.编辑中, XWLX.滚动新闻, null);
-		GenJNewsTestData(5, XWZT.编辑中, XWLX.滚动新闻, null);
+		GenJNewsTestData(5, XWZT.已过期, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.已过期, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.一审未通过, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.一审未通过, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.二审中, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.二审中, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.一审中, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.一审中, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.二审未通过, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.二审未通过, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.已过期, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.已过期, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.编辑中, XWLX.日看点左侧新闻, null);
+		GenJNewsTestData(5, XWZT.编辑中, XWLX.日看点左侧新闻, null);
 	}
 	
 }
