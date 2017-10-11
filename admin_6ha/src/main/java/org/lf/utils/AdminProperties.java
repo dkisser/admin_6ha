@@ -53,10 +53,14 @@ public class AdminProperties {
 	
 	public static final String RKDXW_HTML_TARGDIR = AdminProperties.getValue("rkdxw_html_targDir");
 	
-	public static final String RKDXW_PIC_TARGDIR = AdminProperties.getValue("rkdxw_pic_targDir");
-	
-	public static final String GDXW_PIC_TARGDIR = AdminProperties.getValue("gdxw_pic_targDir");
-	
 	public static final String GDXW_HTML_TARGDIR = AdminProperties.getValue("gdxw_html_targDir");
+	
+	public static final String DTTP_HTML_TARGDIR = AdminProperties.getValue("dttp_html_targDir");
+	
+	public static final String DTTP_PIC_TARGDIR = AdminProperties.getValue("dttp_pic_targDir");
+	
+	public static final String PTTP_PIC_TARGDIR = AdminProperties.getValue("pttp_pic_targDir");
+	
+	public static final String PTTP_HTML_TARGDIR = AdminProperties.getValue("pttp_html_targDir");
 	
 }

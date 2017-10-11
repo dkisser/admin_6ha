@@ -9,6 +9,26 @@
     <result column="zt" property="zt" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
+  <sql id="query_ztAndLx_selective">
+      <if test="id != null" >
+        and id=#{id,jdbcType=INTEGER}
+      </if>
+      <if test="lxList != null and lxList.size() > 0" >
+        and lx in <foreach collection="lxList" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
+      </if>
+      <if test="imgurl != null" >
+       and imgUrl =  #{imgurl,jdbcType=VARCHAR}
+      </if>
+      <if test="href != null" >
+       and href= #{href,jdbcType=VARCHAR}
+      </if>
+      <if test="ztList != null and ztList.size() > 0" >
+        and zt in <foreach collection="ztList" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
+      </if>
+      <if test="remark != null" >
+        and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+  </sql>
   <sql id="query_selective">
   	  <if test="id != null" >
         and id=#{id,jdbcType=INTEGER}
@@ -140,5 +160,12 @@
   		<if test="start != null and offset != null">
   			limit #{start,jdbcType=INTEGER},#{offset,jdbcType=INTEGER}
   		</if>
+  </select>
+  <select id="getTpByZTAndLx" parameterType="java.util.Map"
+  resultMap="BaseResultMap">
+  	select * from j_tp
+  		<where>
+  			<include refid="query_ztAndLx_selective"></include>
+  		</where>
   </select>
 </mapper>

@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%String baseUrl = "http://localhost:8080/admin_6ha"; %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -13,19 +13,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
 <body>
-    <form class="layui-form layui-form-pane" id="addDttpUI_form" method="post" action="twsj/addDttp.do" enctype="multipart/form-data">
+   <form class="layui-form layui-form-pane" id="addDttpUI_form" method="post" action="twsj/addDttp.do" enctype="multipart/form-data">
      <div class="layui-form-item">
-	 </div>
-	 <div class="layui-form-item">
-	    <label class="layui-form-label">标题</label>
-	    <div class="layui-input-block">
-	      <input type="text" name="title" required  lay-verify="title|required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+     	<label class="layui-form-label">图片类型</label>
+	    <div class="layui-input-inline">
+	      <input name="lx" id="addDttpUI_lx" type="text" placeholder="请选择图片类型" autocomplete="off" class="layui-input"/>
 	    </div>
-	  </div>
+	 </div>
 	 <div class="layui-form-item">
 	    <label class="layui-form-label">图片</label>
 	    <div class="layui-input-block">
 	      <input class="easyui-filebox layui-input" style="height:38px;" name="pic" id="addDttpUI_pic">
+	    </div>
+	  </div>
+	 <div class="layui-form-item">
+	    <label class="layui-form-label">标题</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="title" lay-verify="title|required" placeholder="请输入标题" autocomplete="off" class="layui-input">
 	    </div>
 	  </div>
 	  <div class="layui-form-item layui-form-text">
@@ -36,13 +40,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </div>
 	  <div class="layui-form-item">
 	    <div class="layui-input-block" style="margin: 0 400px;">
-	      <button class="layui-btn" id="addDttp_submitBtn" lay-submit lay-filter="addDttp">立即提交</button>
-	      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+	      <button class="layui-btn" lay-submit lay-filter="addDttp">立即提交</button>
+	      <button class="layui-btn layui-btn-primary" onclick="addDttpUI.cancel()">取消</button>
 	    </div>
 	  </div>
-  </form>
+	</form>
 <script type="text/javascript">
+	var addDttpUI ={
+		cancel: function () {
+			$("#dttpsjUI_newAddDlg").dialog("close");
+		}
 
+	};
 	layui.use(['form','layedit','jquery'], function(){
 	    var layedit = layui.layedit,
 	    form = layui.form(),
@@ -54,7 +63,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	    type: 'post' //默认post
     	  }
 	    });
-	    var editIndex = layedit.build('addDttpUI_ymContent'); //建立编辑器
+	    var editIndex = layedit.build('addDttpUI_ymContent',{
+	    	height: 250 
+	    }); //建立编辑器
 	    form.verify({
 	        title: function(value,item){
 	          if(value.length < 5){
@@ -69,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	$("form").submit(function(e){
 	    		  return false;
 	    	});
-    	 	$("#addDtwUI_form").form("submit", {
+    	 	$("#addDttpUI_form	").form("submit", {
     	 		url: getContextPath() +"/admin/tpsj/addDttp.do",
     	 		onSubmit:function () {
     	 			var valid = $("#addDttpUI_form").form("validate");
@@ -80,8 +91,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	 		success:function (result) {
     	 			$("#dttpsjUI_newAddDlg").panel("close");
 	 				$("#dttpsjUI_dgdttpList").datagrid("reload");
-	 				result =eval("("+result+")");
-    	 			if ( result == "success") {
+	 				res = eval("("+result+")");
+    	 			if ( res == "success") {
     	 				layer.msg('操作成功',{
     	 					time: 1000,
     	 				});
@@ -94,10 +105,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    });
 	});
 	
-	$('#addDtwUI_pic').filebox({    
-	    buttonText: '选择文件', 
-	    required: true
+	$("#addDttpUI_lx").combobox({
+		width: 900,
+		height: 38,
+		valueField: 'id',
+		textField: 'text',
+		data:[{
+			id: 2,
+			text:"动态大图"
+		},{
+			id: 3,
+			text: "动态小图"
+		}],
+		editable:false,
+		onLoadSuccess:function () {
+			var data = $(this).combobox("getData");
+			$(this).combobox("select",data[0].id);
+		}
 	});
+	
+	$("#addDttpUI_pic").filebox({
+		required:true,
+		buttonText: '选择动图', 
+		accept:'image/gif'
+	});
+	
+	
 </script>
 
 </body>
