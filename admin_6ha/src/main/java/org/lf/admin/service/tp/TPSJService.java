@@ -110,10 +110,14 @@ public class TPSJService {
 		try {
 			//在jtp中插入记录
 			JTp tp = new JTp();
+			tp.setDm(DateUtils.toLong(new Date())+"");
 			tp.setLx(lx);
+			tp.setDate(new Date());
 			tp.setZt(XWZT.编辑中.getValue());
+			tp.setSqr(czr);
 			tp.setImgurl(picObj.getJSONObject("data").getString("src"));
 			tp.setHref(AdminProperties.SERVER_URL+filePath+"/"+fileName);
+			tp.setRemark(content.getBytes("utf-8"));
 			jTpDao.insertSelective(tp);
 			//在l_news中插入一条记录
 			LNews lnews= new LNews();

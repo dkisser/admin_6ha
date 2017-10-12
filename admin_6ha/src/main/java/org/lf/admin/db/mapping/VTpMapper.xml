@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lf.admin.db.dao.VTpMapper" >
+  <resultMap id="BaseResultMap" type="org.lf.admin.db.pojo.VTp" >
+    <result column="Id" property="id" jdbcType="INTEGER" />
+    <result column="dm" property="dm" jdbcType="VARCHAR" />
+    <result column="lx" property="lx" jdbcType="INTEGER" />
+    <result column="sqr" property="sqr" jdbcType="VARCHAR" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="zt" property="zt" jdbcType="INTEGER" />
+    <result column="fzr" property="fzr" jdbcType="VARCHAR" />
+    <result column="glr" property="glr" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.lf.admin.db.pojo.VTp" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="query_fuzzy">
+      <if test="id != null" >
+        and id=#{id,jdbcType=INTEGER}
+      </if>
+      <if test="dm != null" >
+        and dm = #{dm,jdbcType=VARCHAR}
+      </if>
+      <if test="lxList != null and lxList.size() > 0" >
+        and lx in <foreach collection="lxList" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
+      </if>
+      <if test="sqr != null" >
+       and sqr like CONCAT('%',#{sqr,jdbcType=VARCHAR},'%') 
+      </if>
+      <if test="imgurl != null" >
+        and imgurl=#{imgurl,jdbcType=VARCHAR}
+      </if>
+      <if test="href != null" >
+        and href=#{href,jdbcType=VARCHAR}
+      </if>
+      <if test="date != null" >
+        and date=#{date,jdbcType=TIMESTAMP}
+      </if>
+      <if test="ztList != null and ztList.size() > 0" >
+        and zt in <foreach collection="ztList" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
+      </if>
+      <if test="fzr != null" >
+        and fzr=#{fzr,jdbcType=VARCHAR}
+      </if>
+      <if test="glr != null" >
+        and glr=#{glr,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  <sql id="query_selective">
+  	  <if test="id != null" >
+        and id=#{id,jdbcType=INTEGER}
+      </if>
+      <if test="dm != null" >
+        and dm = #{dm,jdbcType=VARCHAR}
+      </if>
+      <if test="lx != null" >
+        and lx = #{lx,jdbcType=INTEGER}
+      </if>
+      <if test="sqr != null" >
+       and sqr like CONCAT('%',#{sqr,jdbcType=VARCHAR},'%') 
+      </if>
+      <if test="imgurl != null" >
+        and imgurl=#{imgurl,jdbcType=VARCHAR}
+      </if>
+      <if test="href != null" >
+        and href=#{href,jdbcType=VARCHAR}
+      </if>
+      <if test="date != null" >
+        and date=#{date,jdbcType=TIMESTAMP}
+      </if>
+      <if test="zt != null" >
+        and zt=#{zt,jdbcType=INTEGER}
+      </if>
+      <if test="fzr != null" >
+        and fzr=#{fzr,jdbcType=VARCHAR}
+      </if>
+      <if test="glr != null" >
+        and glr=#{glr,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <insert id="insert" parameterType="org.lf.admin.db.pojo.VTp" >
+    insert into v_tp (Id, dm, lx, sqr, 
+      imgUrl, href, date, 
+      zt, fzr, glr, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{dm,jdbcType=VARCHAR}, #{lx,jdbcType=INTEGER}, #{sqr,jdbcType=VARCHAR}, 
+      #{imgurl,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
+      #{zt,jdbcType=INTEGER}, #{fzr,jdbcType=VARCHAR}, #{glr,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.lf.admin.db.pojo.VTp" >
+    insert into v_tp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="dm != null" >
+        dm,
+      </if>
+      <if test="lx != null" >
+        lx,
+      </if>
+      <if test="sqr != null" >
+        sqr,
+      </if>
+      <if test="imgurl != null" >
+        imgUrl,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="zt != null" >
+        zt,
+      </if>
+      <if test="fzr != null" >
+        fzr,
+      </if>
+      <if test="glr != null" >
+        glr,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dm != null" >
+        #{dm,jdbcType=VARCHAR},
+      </if>
+      <if test="lx != null" >
+        #{lx,jdbcType=INTEGER},
+      </if>
+      <if test="sqr != null" >
+        #{sqr,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=INTEGER},
+      </if>
+      <if test="fzr != null" >
+        #{fzr,jdbcType=VARCHAR},
+      </if>
+      <if test="glr != null" >
+        #{glr,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="getDttpList" parameterType="java.util.Map"
+  resultMap="ResultMapWithBLOBs">
+  	select * from v_tp
+  		<where>
+  			<include refid="query_fuzzy"></include>
+  		</where>
+  </select>
+  <select id="select" parameterType="org.lf.admin.db.pojo.VTp"
+  resultMap="ResultMapWithBLOBs">
+  	select * from v_tp
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+  <select id="selectList" parameterType="org.lf.admin.db.pojo.VTp"
+  resultMap="ResultMapWithBLOBs">
+  	select * from v_tp
+  		<where>
+  			<include refid="query_selective"></include>
+  		</where>
+  </select>
+</mapper>

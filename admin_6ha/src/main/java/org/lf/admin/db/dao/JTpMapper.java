@@ -16,6 +16,8 @@ public interface JTpMapper extends BaseMapper<JTp>{
 
     int updateByPrimaryKeySelective(JTp record);
 
+    int updateByPrimaryKeyWithBLOBs(JTp record);
+
     int updateByPrimaryKey(JTp record);
     
     List<JTp> getTpByZTAndLx (Map<String,?> param);

@@ -73,7 +73,7 @@ public class TWCSService {
 	}
 	
 	/**
-	 * 提交news到终审状态
+	 * 提交大图文news到终审状态
 	 * 1.将该news的状态修改为二审中
 	 * 2.在l_news中插入一条记录：
 	 * dm

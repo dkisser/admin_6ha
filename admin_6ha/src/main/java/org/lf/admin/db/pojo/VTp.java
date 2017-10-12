@@ -2,9 +2,7 @@ package org.lf.admin.db.pojo;
 
 import java.util.Date;
 
-import org.lf.admin.db.dao.PagedPojo;
-
-public class JTp extends PagedPojo{
+public class VTp {
     private Integer id;
 
     private String dm;
@@ -13,15 +11,21 @@ public class JTp extends PagedPojo{
 
     private String sqr;
 
-    private Date date;
-
     private String imgurl;
 
     private String href;
 
+    private Date date;
+
     private Integer zt;
 
+    private String fzr;
+
+    private String glr;
+
     private byte[] remark;
+    
+    private String remarkStr;
 
     public Integer getId() {
         return id;
@@ -55,14 +59,6 @@ public class JTp extends PagedPojo{
         this.sqr = sqr == null ? null : sqr.trim();
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public String getImgurl() {
         return imgurl;
     }
@@ -79,12 +75,36 @@ public class JTp extends PagedPojo{
         this.href = href == null ? null : href.trim();
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public Integer getZt() {
         return zt;
     }
 
     public void setZt(Integer zt) {
         this.zt = zt;
+    }
+
+    public String getFzr() {
+        return fzr;
+    }
+
+    public void setFzr(String fzr) {
+        this.fzr = fzr == null ? null : fzr.trim();
+    }
+
+    public String getGlr() {
+        return glr;
+    }
+
+    public void setGlr(String glr) {
+        this.glr = glr == null ? null : glr.trim();
     }
 
     public byte[] getRemark() {
@@ -94,4 +114,12 @@ public class JTp extends PagedPojo{
     public void setRemark(byte[] remark) {
         this.remark = remark;
     }
+
+	public String getRemarkStr() {
+		return remarkStr;
+	}
+
+	public void setRemarkStr(String remarkStr) {
+		this.remarkStr = remarkStr;
+	}
 }
