@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		preview:function (index) {
 			var dtwzsUI_previewRow = $("#dgdtwzsUI").datagrid('getData').rows[index];
-			dtwzsUI.genBigDialog("dtwzsUI_newPreviewDlg", "新闻预览", getContextPath() + "/admin/twzs/previewDtwUI.do",{id:dtwzsUI_previewRow.id});
+			dtwzsUI.genBigDialog("dtwzsUI_newPreviewDlg", "图文预览", getContextPath() + "/admin/twzs/previewDtwUI.do",{id:dtwzsUI_previewRow.id});
 		},
 		ground:function (index) {
 			var dtwzsUI_submitZSRow = $("#dgdtwzsUI").datagrid('getData').rows[index];
@@ -107,13 +107,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		revert:function (index) {
 			dtwzsUI_revertRow = $("#dgdtwzsUI").datagrid('getData').rows[index];
-			dtwzsUI.genSmallDialog("dtwzsUI_newRevertDlg", "终审失败", getContextPath() + "/admin/twzs/revertDtwUI.do");
+			dtwzsUI.genSmallDialog("dtwzsUI_newRevertDlg", "图文驳回", getContextPath() + "/admin/twzs/revertDtwUI.do");
 		}
 			
 	};
 
 	$("#dlgdtwzsUIMain").dialog({
-		title:"大图文初审",
+		title:"大图文终审",
 		width: 1024,
 		height:600,
 		modal:true,

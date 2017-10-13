@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		revert:function (index) {
 			gdxwzsUI_revertRow = $("#dggdxwzsUI").datagrid('getData').rows[index];
-			gdxwzsUI.genSmallDialog("gdxwzsUI_newRevertDlg", "终审失败", getContextPath() + "/admin/xwzs/revertGdxwUI.do");
+			gdxwzsUI.genSmallDialog("gdxwzsUI_newRevertDlg", "新闻驳回", getContextPath() + "/admin/xwzs/revertGdxwUI.do");
 		}
 			
 	};

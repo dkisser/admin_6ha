@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		
 		add:function () {
-			pttpsjUI.createBigDialog("pttpsjUI_newAddDlg", "新增图片", getContextPath() + "/admin/tpsj/addPttpUI.do", {});
+			pttpsjUI.createBigDialog("pttpsjUI_newAddDlg", "新增普通图片", getContextPath() + "/admin/tpsj/addPttpUI.do", {});
 		},
 		
 		del:function (index) {
@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var pttpsjUI_sjRow = $("#pttpsjUI_dgpttpList").datagrid("getData").rows[index];
 			layui.use('layer',function () {
 				var layer = layui.layer;
-				layer.msg('您确定要上架该新闻吗?',{
+				layer.msg('您确定要上架该图片吗?',{
 					time: 10000, //10S后关闭
 					btn:['是的','算了'],
 					yes:function () {
@@ -135,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	};
 	
 	$("#dlgpttpsjUIMain").dialog({
-		title:"动态图片上架申请",
+		title:"普通图片上架申请",
 		width: 1024,
 		height:600,
 		modal:true,

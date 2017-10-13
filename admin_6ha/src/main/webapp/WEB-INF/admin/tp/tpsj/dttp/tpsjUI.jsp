@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		
 		add:function () {
-			dttpsjUI.createBigDialog("dttpsjUI_newAddDlg", "新增图片", getContextPath() + "/admin/tpsj/addDttpUI.do", {});
+			dttpsjUI.createBigDialog("dttpsjUI_newAddDlg", "新增动态图片", getContextPath() + "/admin/tpsj/addDttpUI.do", {});
 		},
 		
 		del:function (index) {
@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var dttpsjUI_sjRow = $("#dttpsjUI_dgdttpList").datagrid("getData").rows[index];
 			layui.use('layer',function () {
 				var layer = layui.layer;
-				layer.msg('您确定要上架该新闻吗?',{
+				layer.msg('您确定要上架该图片吗?',{
 					time: 10000, //10S后关闭
 					btn:['是的','算了'],
 					yes:function () {

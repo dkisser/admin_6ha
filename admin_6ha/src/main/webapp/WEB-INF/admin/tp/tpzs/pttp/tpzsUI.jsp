@@ -67,21 +67,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		preview:function (index) {
 			var pttpzsUI_previewRow = $("#dgpttpzsUI").datagrid('getData').rows[index];
-			pttpzsUI.genBigDialog("pttpzsUI_newPreviewDlg", "新闻预览", getContextPath() + "/admin/tpzs/previewPttpUI.do",{id:pttpzsUI_previewRow.id});
+			pttpzsUI.genBigDialog("pttpzsUI_newPreviewDlg", "图片预览", getContextPath() + "/admin/tpzs/previewPttpUI.do",{id:pttpzsUI_previewRow.id});
 		},
 		ground:function (index) {
 			pttpzsUI_submitZSRow = $("#dgpttpzsUI").datagrid('getData').rows[index];
-			pttpzsUI.genSmallDialog("pttpzsUI_newGroundDlg", "请选择一个新闻下架", getContextPath() + "/admin/tpzs/choosePttpUI.do");
+			pttpzsUI.genSmallDialog("pttpzsUI_newGroundDlg", "请选择一个图片下架", getContextPath() + "/admin/tpzs/choosePttpUI.do");
 		},
 		revert:function (index) {
 			pttpzsUI_revertRow = $("#dgpttpzsUI").datagrid('getData').rows[index];
-			pttpzsUI.genSmallDialog("pttpzsUI_newRevertDlg", "终审驳回", getContextPath() + "/admin/tpzs/revertPttpUI.do");
+			pttpzsUI.genSmallDialog("pttpzsUI_newRevertDlg", "图片驳回", getContextPath() + "/admin/tpzs/revertPttpUI.do");
 		}
 			
 	};
 
 	$("#dlgpttpzsUIMain").dialog({
-		title:"动态图片终审",
+		title:"普通图片终审",
 		width: 1024,
 		height:600,
 		modal:true,

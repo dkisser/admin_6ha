@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		
 		add:function () {
-			rkdxwsjUI.createBigDialog("rkdxwsjUI_newAddDlg", "新增滚动新闻", getContextPath() + "/admin/xwsj/addRkdxwUI.do", {});
+			rkdxwsjUI.createBigDialog("rkdxwsjUI_newAddDlg", "新增日看点新闻", getContextPath() + "/admin/xwsj/addRkdxwUI.do", {});
 		},
 		
 		edit:function (index) {

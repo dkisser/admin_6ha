@@ -111,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	};
 
 	$("#dlgpttpcsUIMain").dialog({
-		title:"动态图片初审",
+		title:"普通图片初审",
 		width: 1024,
 		height:600,
 		modal:true,

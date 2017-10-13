@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		preview:function (index) {
 			var rkdxwcsUI_previewRow = $("#dgrkdxwcsUI").datagrid('getData').rows[index];
-			rkdxwcsUI.genBigDialog("rkdxwcsUI_newPreviewDlg", "图片预览", getContextPath() + "/admin/xwcs/previewRkdxwUI.do",{id:rkdxwcsUI_previewRow.id});
+			rkdxwcsUI.genBigDialog("rkdxwcsUI_newPreviewDlg", "新闻预览", getContextPath() + "/admin/xwcs/previewRkdxwUI.do",{id:rkdxwcsUI_previewRow.id});
 		},
 		submitZS:function (index) {
 			var rkdxwcsUI_submitZSRow = $("#dgrkdxwcsUI").datagrid('getData').rows[index];
@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		revert:function (index) {
 			rkdxwcsUI_revertRow = $("#dgrkdxwcsUI").datagrid('getData').rows[index];
-			rkdxwcsUI.genSmallDialog("rkdxwcsUI_newRevertDlg", "图片预览", getContextPath() + "/admin/xwcs/revertRkdxwUI.do",null);
+			rkdxwcsUI.genSmallDialog("rkdxwcsUI_newRevertDlg", "新闻驳回", getContextPath() + "/admin/xwcs/revertRkdxwUI.do",null);
 		}
 			
 	};

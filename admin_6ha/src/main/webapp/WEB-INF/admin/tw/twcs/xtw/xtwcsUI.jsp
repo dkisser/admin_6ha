@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		preview:function (index) {
 			var xtwcsUI_previewRow = $("#dgxtwcsUI").datagrid('getData').rows[index];
-			xtwcsUI.genBigDialog("xtwcsUI_newPreviewDlg", "图片预览", getContextPath() + "/admin/twcs/previewXtwUI.do",{id:xtwcsUI_previewRow.id});
+			xtwcsUI.genBigDialog("xtwcsUI_newPreviewDlg", "图文预览", getContextPath() + "/admin/twcs/previewXtwUI.do",{id:xtwcsUI_previewRow.id});
 		},
 		submitZS:function (index) {
 			var xtwcsUI_submitZSRow = $("#dgxtwcsUI").datagrid('getData').rows[index];
@@ -107,13 +107,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		revert:function (index) {
 			xtwcsUI_revertRow = $("#dgxtwcsUI").datagrid('getData').rows[index];
-			xtwcsUI.genSmallDialog("xtwcsUI_newRevertDlg", "图片预览", getContextPath() + "/admin/twcs/revertXtwUI.do",null);
+			xtwcsUI.genSmallDialog("xtwcsUI_newRevertDlg", "图文驳回", getContextPath() + "/admin/twcs/revertXtwUI.do",null);
 		}
 			
 	};
 
 	$("#dlgxtwcsUIMain").dialog({
-		title:"大图文初审",
+		title:"小图文初审",
 		width: 1024,
 		height:600,
 		modal:true,

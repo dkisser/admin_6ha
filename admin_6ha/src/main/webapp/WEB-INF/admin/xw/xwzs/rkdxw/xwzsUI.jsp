@@ -77,13 +77,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		revert:function (index) {
 			rkdxwzsUI_revertRow = $("#dgrkdxwzsUI").datagrid('getData').rows[index];
-			rkdxwzsUI.genSmallDialog("rkdxwzsUI_newRevertDlg", "终审失败", getContextPath() + "/admin/xwzs/revertRkdxwUI.do");
+			rkdxwzsUI.genSmallDialog("rkdxwzsUI_newRevertDlg", "新闻驳回", getContextPath() + "/admin/xwzs/revertRkdxwUI.do");
 		}
 			
 	};
 
 	$("#dlgrkdxwzsUIMain").dialog({
-		title:"滚动新闻终审",
+		title:"日看点新闻终审",
 		width: 1024,
 		height:600,
 		modal:true,

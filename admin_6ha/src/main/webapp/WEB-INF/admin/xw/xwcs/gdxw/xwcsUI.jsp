@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		preview:function (index) {
 			var gdxwcsUI_previewRow = $("#dggdxwcsUI").datagrid('getData').rows[index];
-			gdxwcsUI.genBigDialog("gdxwcsUI_newPreviewDlg", "图片预览", getContextPath() + "/admin/xwcs/previewGdxwUI.do",{id:gdxwcsUI_previewRow.id});
+			gdxwcsUI.genBigDialog("gdxwcsUI_newPreviewDlg", "新闻预览", getContextPath() + "/admin/xwcs/previewGdxwUI.do",{id:gdxwcsUI_previewRow.id});
 		},
 		submitGdxwZS:function (index) {
 			var gdxwcsUI_submitZSRow = $("#dggdxwcsUI").datagrid('getData').rows[index];
@@ -107,13 +107,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		revertGdxw:function (index) {
 			gdxwcsUI_revertRow = $("#dggdxwcsUI").datagrid('getData').rows[index];
-			gdxwcsUI.genSmallDialog("gdxwcsUI_newRevertDlg", "图片预览", getContextPath() + "/admin/xwcs/revertGdxwUI.do",null);
+			gdxwcsUI.genSmallDialog("gdxwcsUI_newRevertDlg", "新闻驳回", getContextPath() + "/admin/xwcs/revertGdxwUI.do",null);
 		}
 			
 	};
 
 	$("#dlggdxwcsUIMain").dialog({
-		title:"大图文初审",
+		title:"滚动新闻初审",
 		width: 1024,
 		height:600,
 		modal:true,

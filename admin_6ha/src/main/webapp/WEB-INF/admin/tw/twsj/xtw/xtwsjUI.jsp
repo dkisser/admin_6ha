@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		
 		add:function () {
-			xtwsjUI.createBigDialog("xtwsjUI_newAddDlg", "新增大图文", getContextPath() + "/admin/twsj/addXtwUI.do", {});
+			xtwsjUI.createBigDialog("xtwsjUI_newAddDlg", "新增小图文", getContextPath() + "/admin/twsj/addXtwUI.do", {});
 		},
 		
 		edit:function (index) {
@@ -140,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	};
 	
 	$("#dlgxtwsjUIMain").dialog({
-		title:"大图文上架申请",
+		title:"小图文上架申请",
 		width: 1024,
 		height:600,
 		modal:true,

@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		preview:function (index) {
 			var dtwcsUI_previewRow = $("#dgdtwcsUI").datagrid('getData').rows[index];
-			dtwcsUI.genBigDialog("dtwcsUI_newPreviewDlg", "图片预览", getContextPath() + "/admin/twcs/previewDtwUI.do",{id:dtwcsUI_previewRow.id});
+			dtwcsUI.genBigDialog("dtwcsUI_newPreviewDlg", "图文预览", getContextPath() + "/admin/twcs/previewDtwUI.do",{id:dtwcsUI_previewRow.id});
 		},
 		submitZS:function (index) {
 			var dtwcsUI_submitZSRow = $("#dgdtwcsUI").datagrid('getData').rows[index];
@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		revert:function (index) {
 			dtwcsUI_revertRow = $("#dgdtwcsUI").datagrid('getData').rows[index];
-			dtwcsUI.genSmallDialog("dtwcsUI_newRevertDlg", "图片预览", getContextPath() + "/admin/twcs/revertDtwUI.do",null);
+			dtwcsUI.genSmallDialog("dtwcsUI_newRevertDlg", "图文驳回", getContextPath() + "/admin/twcs/revertDtwUI.do",null);
 		}
 			
 	};
