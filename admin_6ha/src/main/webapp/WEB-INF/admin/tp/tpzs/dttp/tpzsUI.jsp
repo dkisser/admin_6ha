@@ -13,22 +13,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
 <body>
-<div id="dlgdttpcsUIMain">
-  <table id="dttpcsUI_toolbar" style="width:100%;">
+<div id="dlgdttpzsUIMain">
+  <table id="dttpzsUI_toolbar" style="width:100%;">
     <tr>
       <td style="width: 760px;"></td>
-      <td>申请人:</td><td><input id="dttpcsUI_sqrtxb" name="sqr"/></td>
-      <td><a class="easyui-linkbutton" onclick="dttpcsUI.query()" data-options="iconCls:'icon-search'">查询</a></td>
+      <td>申请人:</td><td><input id="dttpzsUI_sqrtxb" name="sqr" style="width: 120px;"/></td>
+      <td style="padding-left: 20px;"><a class="easyui-linkbutton" onclick="dttpzsUI.query()" data-options="iconCls:'icon-search'">查询</a></td>
     </tr>
   </table>
-  <div id="dgdttpcsUI" fit="true"></div>
+  <div id="dgdttpzsUI" fit="true"></div>
 </div>
 <script type="text/javascript">
 
-	var dttpcsUI = {
+	var dttpzsUI = {
 		query:function (){
-			$("#dgdttpcsUI").datagrid('reload',{
-				sqr:$("#dttpcsUI_sqrtxb").textbox('getValue')
+			$("#dgdttpzsUI").datagrid('reload',{
+				sqr:$("#dttpzsUI_sqrtxb").textbox('getValue')
 			});
 		},
 		genSmallDialog:function(dialogId,title,url,params) {
@@ -66,52 +66,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		},
 		preview:function (index) {
-			var dttpcsUI_previewRow = $("#dgdttpcsUI").datagrid('getData').rows[index];
-			dttpcsUI.genBigDialog("dttpcsUI_newPreviewDlg", "图片预览", getContextPath() + "/admin/tpcs/previewDttpUI.do",{id:dttpcsUI_previewRow.id});
+			var dttpzsUI_previewRow = $("#dgdttpzsUI").datagrid('getData').rows[index];
+			dttpzsUI.genBigDialog("dttpzsUI_newPreviewDlg", "新闻预览", getContextPath() + "/admin/tpzs/previewDttpUI.do",{id:dttpzsUI_previewRow.id});
 		},
-		submitZS:function (index) {
-			var dttpcsUI_submitZSRow = $("#dgdttpcsUI").datagrid('getData').rows[index];
-			layui.use('layer',function () {
-				var layer = layui.layer;
-				layer.msg('您确定要将该图片提交至终审吗?',{
-					time: 10000, //10S后关闭
-					btn:['是的','算了'],
-					yes:function () {
-						$.ajax({
-							url: getContextPath() +"/admin/tpcs/submitDttpZS.do",
-							cache:false,
-							data:{dm:dttpcsUI_submitZSRow.dm},
-							dataType:"json",
-							method:"POST",
-							success:function (res) {
-								$("#dgdttpcsUI").datagrid("reload");
-								if ( res == "success") {
-			    	 				layer.msg('操作成功',{
-			    	 					time: 1000,
-			    	 				});
-			    	 			} else {
-			    	 				layer.alert(result,{title:'发生了一个错误'});
-			    	 			}
-							},
-							error:function () {
-								alert("Ajax error!");
-							}
-						});
-					},
-					btn2:function (index) {
-					}
-				});
-			});
+		ground:function (index) {
+			dttpzsUI_submitZSRow = $("#dgdttpzsUI").datagrid('getData').rows[index];
+			dttpzsUI.genSmallDialog("dttpzsUI_newGroundDlg", "请选择一个新闻下架", getContextPath() + "/admin/tpzs/chooseDttpUI.do");
 		},
 		revert:function (index) {
-			dttpcsUI_revertRow = $("#dgdttpcsUI").datagrid('getData').rows[index];
-			dttpcsUI.genSmallDialog("dttpcsUI_newRevertDlg", "驳回图片", getContextPath() + "/admin/tpcs/revertDttpUI.do",null);
+			dttpzsUI_revertRow = $("#dgdttpzsUI").datagrid('getData').rows[index];
+			dttpzsUI.genSmallDialog("dttpzsUI_newRevertDlg", "终审驳回", getContextPath() + "/admin/tpzs/revertDttpUI.do");
 		}
 			
 	};
 
-	$("#dlgdttpcsUIMain").dialog({
-		title:"动态图片初审",
+	$("#dlgdttpzsUIMain").dialog({
+		title:"动态图片终审",
 		width: 1024,
 		height:600,
 		modal:true,
@@ -119,14 +89,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		cache:false
 	});
 	
-	$("#dttpcsUI_sqrtxb").textbox({
-		width: 120
-	});
+	$("#dttpzsUI_sqrtxb").textbox({});
 	
+	$("#dttpzsUI_titletxb").textbox({});
 	
-	$("#dgdttpcsUI").datagrid({
-		url:getContextPath() + "/admin/tpcs/getDttpList.do",
-		toolbar: "#dttpcsUI_toolbar",
+	$("#dgdttpzsUI").datagrid({
+		url:getContextPath() + "/admin/tpzs/getDttpList.do",
+		toolbar: "#dttpzsUI_toolbar",
 		pagination : true, //是否有分页工具
 		pagePosition : "bottom", //分页工具位置
 		pageSize : 15, //分页默认大小
@@ -140,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		emptyMsg : "没有数据",
 		errorMsg :"加载失败",
 		columns:[[
-			{
+		     {
 				title:'申请人',
 				field:'sqr',
 				width: '10%',
@@ -204,24 +173,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	width: '20%',
 		    	align:'center',
 				formatter:function(value,row,index) {
-		    		return "<a class='dttpcsUI_lookBtn' onclick='dttpcsUI.preview("+index+")'>查看</a>&nbsp;<a class='dttpcsUI_agreeBtn' onclick='dttpcsUI.submitZS("+index+")'>提交终审</a>&nbsp;<a class='dttpcsUI_refuseBtn' onclick='dttpcsUI.revert("+index+")'>驳回</a>";
+		    		return "<a class='dttpzsUI_lookBtn' onclick='dttpzsUI.preview("+index+")'>查看</a>&nbsp;<a class='dttpzsUI_agreeBtn' onclick='dttpzsUI.ground("+index+")'>同意上架</a>&nbsp;<a class='dttpzsUI_refuseBtn' onclick='dttpzsUI.revert("+index+")'>驳回</a>";
 		    	}
 		     }
 		]],
 		onLoadSuccess: function () {
-			$(".dttpcsUI_lookBtn").linkbutton({
+			$(".dttpzsUI_lookBtn").linkbutton({
 				iconCls:'icon-search',
 				iconAlign:'left',
 				plain:true,
 				height: 23
 			});
-			$(".dttpcsUI_agreeBtn").linkbutton({
+			$(".dttpzsUI_agreeBtn").linkbutton({
 				iconCls:'icon-ok',
 				iconAlign:'left',
 				plain:true,
 				height: 23
 			});
-			$(".dttpcsUI_refuseBtn").linkbutton({
+			$(".dttpzsUI_refuseBtn").linkbutton({
 				iconCls:'icon-no',
 				iconAlign:'left',
 				plain:true,

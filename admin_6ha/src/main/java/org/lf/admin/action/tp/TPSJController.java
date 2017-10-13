@@ -34,7 +34,7 @@ public class TPSJController extends BaseController{
 		return ROOT_URL+"/dttp/tpsjUI";
 	}
 	
-	@RequestMapping("getDttpList")
+	@RequestMapping("getDttpList.do")
 	@ResponseBody
 	public EasyuiDatagrid<JTp> getDttpList(int page,int rows){
 		return tpsjService.getDttpList(page, rows);
@@ -91,10 +91,51 @@ public class TPSJController extends BaseController{
 		return ROOT_URL+"/pttp/tpsjUI";
 	}
 	
-	@RequestMapping("getPttpList")
+	@RequestMapping("getPttpList.do")
 	@ResponseBody
 	public EasyuiDatagrid<JTp> getPttpList(int page,int rows){
 		return tpsjService.getPttpList(page, rows);
 	}
 	
+	@RequestMapping("addPttpUI.do")
+	public String addPttpUI() {
+		return ROOT_URL+"/pttp/addUI";
+	}
+	
+	@RequestMapping("addPttp.do")
+	@ResponseBody
+	public String addPttp(HttpSession session,String title,String content,
+			@RequestParam(value="pic",required=true)MultipartFile pic,
+			@RequestParam(value="file",required=true)MultipartFile file){
+		String czr = getUname(session);
+		try {
+			tpsjService.addPttp(session, czr, title, content, pic);
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	@RequestMapping("delPttp.do")
+	@ResponseBody
+	public String delPttp(Integer id){
+		try {
+			tpsjService.delPttp(id);
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	@RequestMapping("sjPttp.do")
+	@ResponseBody
+	public String sjPttp(HttpSession session,Integer id){
+		String czr = getUname(session);
+		try {
+			tpsjService.sjPttp(id, czr);
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
 }

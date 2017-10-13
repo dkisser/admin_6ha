@@ -49,7 +49,7 @@ public class TPCSController extends BaseController{
 		lxList.add(TPLX.正经逛展会_大图.getValue());
 		lxList.add(TPLX.正经逛展会_小图.getValue());
 		try {
-			datagrid = tpcsService.getDttpCSList(sqr, fzr, lxList, page, rows);
+			datagrid = tpcsService.getTPCSList(sqr, fzr, lxList, page, rows);
 					
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -58,10 +58,7 @@ public class TPCSController extends BaseController{
 	}
 	
 	/**
-	 * 图片驳回
-	 */
-	/**
-	 * 驳回大图文申请
+	 * 驳回动态图片申请
 	 * @return
 	 */
 	@RequestMapping("revertDttpUI.do")
@@ -74,7 +71,7 @@ public class TPCSController extends BaseController{
 	public String revertDttp(HttpSession session,String dm,String remark) {
 		String czr = getUname(session);
 		try {
-			tpcsService.revertDtw(dm, czr, remark);
+			tpcsService.revertDttp(dm, czr, remark);
 		} catch (OperException e) {
 			return e.getMessage();
 		}
@@ -114,5 +111,64 @@ public class TPCSController extends BaseController{
 		return ROOT_URL+"/pttp/tpcsUI";
 	}
 	
+	@RequestMapping("getPttpList.do")
+	@ResponseBody
+	public EasyuiDatagrid<VTp> getPttpList(HttpSession session,String sqr,String title,int page,int rows) {
+		String fzr = getCurUser(session).getUname();
+		EasyuiDatagrid<VTp> datagrid = null;
+		List<Integer> lxList = new ArrayList<Integer>();
+		lxList.add(TPLX.ShowGirl美女.getValue());
+		try {
+			datagrid = tpcsService.getTPCSList(sqr, fzr, lxList, page, rows);
+					
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return datagrid;
+	}
 	
+	/**
+	 * 驳回动态图片申请
+	 * @return
+	 */
+	@RequestMapping("revertPttpUI.do")
+	public String revertPttpUI () {
+		return ROOT_URL+"/pttp/revertUI";
+	}
+	
+	@RequestMapping("revertPttp.do")
+	@ResponseBody
+	public String revertPttp(HttpSession session,String dm,String remark) {
+		String czr = getUname(session);
+		try {
+			tpcsService.revertPttp(dm, czr, remark);
+		} catch (OperException e) {
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 提交至终审
+	 * @return
+	 */
+	@RequestMapping("submitPttpZS.do")
+	@ResponseBody
+	public String submitPttpZS(HttpSession session,String dm) {
+		String czr = getUname(session);
+		try {
+			tpcsService.submitPttpZS(dm, czr);
+		} catch (OperException e) {
+			return e.getMessage();
+		}
+		return SUCCESS;
+	}
+	
+	@RequestMapping("previewPttpUI.do")
+	public String previewPttpUI (Model model,Integer id){
+		VTp tp = new VTp();
+		tp.setId(id);
+		model.addAttribute("previewNews", tpcsService.getVTp(tp));
+		return ROOT_URL+"/pttp/previewUI";
+	}
 }

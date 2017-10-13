@@ -68,7 +68,7 @@ public class XWZSService {
 			news.setNewZt(XWZT.二审未通过.getValue());
 			news.setDate(new Date());
 			StringBuilder remarkSb = new StringBuilder();
-			remarkSb.append("滚动新闻").append("(").append(dm).append(")");
+			remarkSb.append("滚动新闻").append("（").append(dm).append("）");
 			remarkSb.append("于").append(DateUtils.toString(new Date())).append("被").append(czr);
 			remarkSb.append("提交进行二审，现处于").append(XWZT.二审未通过).append("状态，");
 			remarkSb.append("驳回原因：").append(remark);
@@ -134,20 +134,20 @@ public class XWZSService {
 			news.setNewZt(XWZT.上架中.getValue());
 			news.setDate(new Date());
 			StringBuilder remarkSb = new StringBuilder();
-			remarkSb.append("滚动新闻").append("(").append(dm).append(")");
+			remarkSb.append("滚动新闻").append("（").append(dm).append("）");
 			remarkSb.append("于").append(DateUtils.toString(new Date())).append("被提交，经").append(czr);
 			remarkSb.append("审批通过，现处于").append(XWZT.上架中);
 			news.setRemark(remarkSb.toString());
 			lNewsDao.insertSelective(news);
 			//在l_news中插入一条记录
 			LNews oldnews = new LNews();
-			oldnews.setDm(dm);
+			oldnews.setDm(replaceDm);
 			oldnews.setCzr(czr);
 			oldnews.setOldZt(XWZT.二审中.getValue());
 			oldnews.setNewZt(XWZT.上架中.getValue());
 			oldnews.setDate(new Date());
 			StringBuilder remarkSb_old = new StringBuilder();
-			remarkSb_old.append("滚动新闻").append("(").append(dm).append(")");
+			remarkSb_old.append("滚动新闻").append("（").append(dm).append("）");
 			remarkSb_old.append("于").append(DateUtils.toString(new Date())).append("经").append(czr);
 			remarkSb_old.append("审批下架，现处于").append(XWZT.已过期);
 			oldnews.setRemark(remarkSb_old.toString());
@@ -254,20 +254,20 @@ public class XWZSService {
 			news.setNewZt(XWZT.上架中.getValue());
 			news.setDate(new Date());
 			StringBuilder remarkSb = new StringBuilder();
-			remarkSb.append("日看点新闻").append("(").append(dm).append(")");
+			remarkSb.append("日看点新闻").append("（").append(dm).append("）");
 			remarkSb.append("于").append(DateUtils.toString(new Date())).append("被提交，经").append(czr);
 			remarkSb.append("审批通过，现处于").append(XWZT.上架中);
 			news.setRemark(remarkSb.toString());
 			lNewsDao.insertSelective(news);
 			//在l_news中插入一条记录
 			LNews oldnews = new LNews();
-			oldnews.setDm(dm);
+			oldnews.setDm(replaceDm);
 			oldnews.setCzr(czr);
 			oldnews.setOldZt(XWZT.二审中.getValue());
 			oldnews.setNewZt(XWZT.上架中.getValue());
 			oldnews.setDate(new Date());
 			StringBuilder remarkSb_old = new StringBuilder();
-			remarkSb_old.append("日看点新闻").append("(").append(dm).append(")");
+			remarkSb_old.append("日看点新闻").append("（").append(dm).append("）");
 			remarkSb_old.append("于").append(DateUtils.toString(new Date())).append("经").append(czr);
 			remarkSb_old.append("审批下架，现处于").append(XWZT.已过期);
 			oldnews.setRemark(remarkSb_old.toString());

@@ -65,9 +65,9 @@ public class TWZSController extends BaseController{
 	 * 上架
 	 * @return
 	 */
-	@RequestMapping("groundNews.do")
+	@RequestMapping("groundDtwNews.do")
 	@ResponseBody
-	public String groundNews(HttpSession session,String dm) {
+	public String groundDtwNews(HttpSession session,String dm) {
 		String czr = getUname(session);
 		try {
 			twzsService.groundDtwNews(dm,czr);

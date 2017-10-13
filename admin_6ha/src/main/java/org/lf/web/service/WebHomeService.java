@@ -136,9 +136,11 @@ public class WebHomeService {
 		tp.setLx(TPLX.正经逛展会_小图.getValue());
 		tp.setStart(0);
 		tp.setOffset(14);
+		tp.setZt(XWZT.上架中.getValue());
 		List<JTp> sList = jTpDao.selectList(tp);
 		tp.setLx(TPLX.正经逛展会_大图.getValue());
 		tp.setOffset(1);
+		tp.setZt(XWZT.上架中.getValue());
 		List<JTp> bList = jTpDao.selectList(tp);
 		bList.addAll(sList);
 		return bList;
@@ -152,6 +154,7 @@ public class WebHomeService {
 		tp.setLx(TPLX.ShowGirl美女.getValue());
 		tp.setStart(0);
 		tp.setOffset(8);
+		tp.setZt(XWZT.上架中.getValue());
 		return jTpDao.selectList(tp);
 	}
 	

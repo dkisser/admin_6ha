@@ -170,6 +170,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    			content += "动态大图";
 		    		} else if (value == 3) {
 		    			content += "动态小图";
+		    		} else if (value == 4) {
+		    			content += "普通图片";
 		    		}
 		    		return content+="</span>";
 		    	}
