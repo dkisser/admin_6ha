@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<%String baseUrl="http://localhost:8080/admin_6ha";%>
+<%String baseUrl="http://125.220.70.103:8080/admin_6ha";%>
 </head>
 <body>
 <link href="${pageContext.servletContext.contextPath }/js/layui/css/layui.css" rel="stylesheet" type="text/css">

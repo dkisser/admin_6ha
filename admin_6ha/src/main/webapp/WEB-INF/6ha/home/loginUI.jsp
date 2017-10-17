@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<%String baseUrl="http://localhost:8080/admin_6ha"; %>
+<%String baseUrl="http://125.220.70.103:8080/admin_6ha"; %>
 <title>溜哈游戏资讯网</title>
 <link type="image/x-icon" rel="icon" href="http://ue.17173cdn.com/images/lib/v1/favicon-hd.ico" />
 <link href="${pageContext.servletContext.contextPath }/css/login.css" rel="stylesheet" type="text/css">

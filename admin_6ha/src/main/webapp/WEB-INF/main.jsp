@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>admin_6ha管理平台</title>
-<%String baseUrl = "http://localhost:8080/admin_6ha"; %>
+<%String baseUrl = "http://125.220.70.103:8080/admin_6ha"; %>
 <link rel="stylesheet" type="text/css" href="<%=baseUrl %>/js/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=baseUrl %>/js/easyui/themes/icon.css">
 <link href="<%=baseUrl %>/js/layui/css/layui.css" rel="stylesheet" type="text/css">

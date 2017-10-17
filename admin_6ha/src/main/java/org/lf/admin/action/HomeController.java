@@ -39,7 +39,7 @@ public class HomeController extends BaseController{
 	
 	@RequestMapping("welcome.do")
 	public String welcome () {
-		return "welcome";
+		return ADMIN_URL+"welcome";
 	}
 
 	@RequestMapping("loginAction.do")

@@ -3,7 +3,7 @@
 <html>
 <body>
 <script type="text/javascript">
-	window.location.href="localhost:8080/admin_6ha/web/main.do";
+	window.location.href="125.220.70.103:8080/admin_6ha/web/main.do";
 </script>
 </body>
 </html>

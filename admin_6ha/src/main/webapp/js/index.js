@@ -79,7 +79,7 @@ var ws ;
 	if (typeof(WebSocket) !== "undefined") {
 		console.info("支持websocket通讯");
 		//创建webSocket对象
-		ws = new WebSocket("ws://localhost:8080/admin_6ha/ws");
+		ws = new WebSocket("ws://125.220.70.103:8080/admin_6ha/ws");
 		//建立连接 发送消息 断开连接 发生异常 的时候都会有回调函数产生
 		ws.onopen = function () {
 			console.info("建立起连接");
