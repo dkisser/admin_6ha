@@ -27,7 +27,7 @@
         <!-- 二维码处理  -->
         <zxing.version>3.2.1</zxing.version>
         <tomcat.version>7.0.75</tomcat.version>
-    </properties>
+  </properties>
 	
   <dependencies>
     <dependency>
