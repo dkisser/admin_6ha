@@ -2,6 +2,7 @@ package org.lf.admin.db.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
 import org.lf.admin.db.pojo.User;
 
 public interface UserMapper extends BaseMapper<User>{
@@ -22,4 +23,6 @@ public interface UserMapper extends BaseMapper<User>{
     
     int countUserList(User user);
     
+    @Select("select * from user")
+    List<User> getUser(User user);
 }

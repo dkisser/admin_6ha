@@ -18,6 +18,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath }/js/home.js"></script> 
 	<link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath }/css/jcdj.css">
 	<style type="text/css">
+		body{
+			
+			margin: 0;
+			padding: 0;
+		
+		}
 		.container{
             width: 100%;
             height: 100%;
