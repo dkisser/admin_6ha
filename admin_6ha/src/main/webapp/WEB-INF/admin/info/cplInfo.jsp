@@ -206,6 +206,7 @@ cplInfo = {
 	    		striped: true,
 	    		nowrap: true,
 	    		loadMsg: "数据正在加载中,请稍后...",
+	    		emptyMsg: "目前暂无任何数据额...",
 	    		singleSelect: true,
 	    		showHeader: true,
 	    		columns:[[
@@ -248,6 +249,7 @@ cplInfo = {
 		striped: true,
 		nowrap: true,
 		loadMsg: "数据正在加载中,请稍后...",
+		emptyMsg: "目前暂无任何数据额...",
 		singleSelect: true,
 		showHeader: true,
 		columns:[[

@@ -14,16 +14,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
    	<div id="dlgUserCMain">
-   		  <div id="userC_toolbar" style="height: 40px;width:100%;line-height: 40px;">
+   		  <div id="userC_toolbar" style="height: 30px;width:100%;line-height: 20px;">
    		    <div style="height: 100%;float: left;">
    		      <div style="float: left;"></div>
    		    </div>
    		    <div style="height: 100%;float: right;">
    		      <div>
-   		        <div style="float: left;">用户名：</div>
-   		        <div style="float: left;"><input id="txbUserCname" name="uname"/></div>
-   		        <div style="float: left;padding-left: 30px;">认证类别：</div>
-   		        <div style="float: left;padding-right: 30px;"><input id="cbxUserCstatus" name="status"/></div>
+   		        <div style="float: left;padding-top: 5px;">用户名：</div>
+   		        <div style="float: left;padding-top: 5px;"><input id="txbUserCname" name="uname"/></div>
+   		        <div style="float: left;padding-left: 30px;padding-top: 5px;">认证类别：</div>
+   		        <div style="float: left;padding-right: 30px;padding-top: 5px;"><input id="cbxUserCstatus" name="status"/></div>
    		      </div>
    		    </div>
    		  </div>
@@ -119,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	};
 	
 	$("#dlgUserCMain").dialog({
-		title: "普通用户",
+		title: "编辑用户查询",
 		width: 1024,
 		height: 600,
 		cache: false,
@@ -167,6 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		striped: true,
 		nowrap: true,
 		loadMsg: "数据正在加载中,请稍后...",
+		emptyMsg: "目前暂无任何数据额...",
 		rownumbers: true,
 		singleSelect: true,
 		showHeader: true,
@@ -221,13 +222,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			          align: "center", 
 			          formatter: function (value,row,index) {
 			        	  if (value == 1) {
-			        		  return "普通用户";
+			        		  return "编辑";
 			        	  } else if (value ==2) {
-			        		  return "vip用户";
+			        		  return "助理编辑";
 			        	  } else if (value ==3) {
-			        		  return "管理员用户";
-			        	  } else {
-			        		  return "超级管理员用户";
+			        		  return "系统管理员";
+			        	  } else if(value == 4){
+			        		  return "超级管理员";
+			        	  } else if (value == 5) {
+			        		  return "编辑主任";
 			        	  }
 			          }
 			       },{

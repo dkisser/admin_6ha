@@ -153,6 +153,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		striped : true, //斑马线样式,
 		nowrap : true, //是否在一行显示所有，自动换行
 		loadMsg : "努力加载中，请稍后。。。。",//加载信息
+		emptyMsg: "目前暂无任何数据额...",
 		rownumbers : true, //是否显示行号
 		singleSelect : true, //只能同时选择一行
 		showHeader : true,//显示行头，默认true;
