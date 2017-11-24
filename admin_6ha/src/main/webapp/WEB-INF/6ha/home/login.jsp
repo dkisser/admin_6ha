@@ -75,7 +75,7 @@
 	  });
 	  
 		  form.on('submit(login)',function(data){
-			alert(JSON.stringify(data.feild));
+			
 	      });
 		  
 
