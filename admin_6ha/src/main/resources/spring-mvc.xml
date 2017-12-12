@@ -51,6 +51,7 @@
 	    	<mvc:exclude-mapping path="/admin/loginUI.do"/>
 	    	<mvc:exclude-mapping path="/admin/loginAction.do"/>
 	    	<mvc:exclude-mapping path="/admin/main.do"/>
+	    	<mvc:exclude-mapping path="/restful/**"/>
 	    	
   	    	<mvc:exclude-mapping path="/web/main.do"/>
   	    	<mvc:exclude-mapping path="/web/loginUI.do"/>
