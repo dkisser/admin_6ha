@@ -106,7 +106,7 @@ public class TPSJController extends BaseController{
 	@ResponseBody
 	public String addPttp(HttpSession session,String title,String content,
 			@RequestParam(value="pic",required=true)MultipartFile pic,
-			@RequestParam(value="file",required=true)MultipartFile file){
+			@RequestParam(value="file",required=false)MultipartFile file){
 		String czr = getUname(session);
 		try {
 			tpsjService.addPttp(session, czr, title, content, pic);

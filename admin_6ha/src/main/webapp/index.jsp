@@ -3,6 +3,6 @@
 <%String baseUrl = AdminProperties.SERVER_URL; %>
 <html>
 <script>
-window.location.href=<%=baseUrl%>"/web/main.do";
+window.location.href="<%=baseUrl%>"+"/web/main.do";
 </script>
 </html>

@@ -86,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	 		success:function (result) {
     	 			$("#pttpsjUI_newAddDlg").panel("close");
 	 				$("#pttpsjUI_dgpttpList").datagrid("reload");
-	 				res = eval("("+result+")");
+	 				var res = eval("("+result+")");
     	 			if ( res == "success") {
     	 				layer.msg('操作成功',{
     	 					time: 1000,
