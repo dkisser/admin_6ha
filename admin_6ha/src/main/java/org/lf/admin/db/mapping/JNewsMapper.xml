@@ -196,6 +196,7 @@
       remark = #{remark,jdbcType=LONGVARBINARY}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+
   <select id="select" parameterType="org.lf.admin.db.pojo.JNews"
   resultMap="BaseResultMap">
   	select * from j_news
