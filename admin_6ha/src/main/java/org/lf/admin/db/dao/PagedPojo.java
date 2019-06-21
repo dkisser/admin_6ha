@@ -24,5 +24,5 @@ public class PagedPojo {
 	public void setOffset(Integer offset) {
 		this.offset = offset;
 	}
-	
+
 }

@@ -1,6 +1,9 @@
 package org.lf.admin.db.dao;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.lf.admin.db.pojo.JNews;
+
+import java.util.List;
 
 public interface JNewsMapper extends BaseMapper<JNews>{
     int deleteByPrimaryKey(Integer id);
@@ -18,4 +21,5 @@ public interface JNewsMapper extends BaseMapper<JNews>{
     int updateByPrimaryKeyWithBLOBsSelective(JNews record);
 
     int updateByPrimaryKey(JNews record);
+
 }
